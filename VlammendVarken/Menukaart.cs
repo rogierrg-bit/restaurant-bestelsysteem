@@ -28,6 +28,27 @@ namespace VlammendVarken
             }
         }
 
+        private const string VegLeafSvg = "<svg viewBox=\"0 0 24 24\" width=\"13\" height=\"13\" fill=\"#639922\" style=\"vertical-align: -2px; margin-right: 4px;\"><path d=\"M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z\"/></svg>";
+
+        private static string LeesLogoAlsDataUri()
+        {
+            var pad = Path.Combine(AppContext.BaseDirectory, "logo.png");
+            if (!File.Exists(pad))
+            {
+                pad = "logo.png";
+                if (!File.Exists(pad)) return string.Empty;
+            }
+            try
+            {
+                var bytes = File.ReadAllBytes(pad);
+                return "data:image/png;base64," + Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         public void GenereerHTML(string bestandspad)
         {
             var voorgerechten = new List<Voorgerecht>();
@@ -68,6 +89,7 @@ namespace VlammendVarken
             sb.AppendLine("    .allergenen { font-size: 0.8rem; color: #888888; }");
             sb.AppendLine("    .alcohol { font-size: 0.85rem; color: #c9a87a; font-variant: small-caps; }");
             sb.AppendLine("    .veg-icon { color: #6aaa3a; margin-right: 0.35rem; font-size: 1.05em; }");
+            sb.AppendLine("    header img.logo { display: block; margin: 0 auto 0.5rem; max-width: 120px; height: auto; }");
             sb.AppendLine("    .dranken-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }");
             sb.AppendLine("    .dranken-col-header { font-style: italic; color: #999999; margin-bottom: 0.8rem; font-size: 0.95rem; }");
             sb.AppendLine("    .drank-item { margin-bottom: 1.2rem; }");
@@ -79,6 +101,11 @@ namespace VlammendVarken
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("  <header>");
+            var logoDataUri = LeesLogoAlsDataUri();
+            if (!string.IsNullOrEmpty(logoDataUri))
+            {
+                sb.AppendLine($"    <img class=\"logo\" src=\"{logoDataUri}\" alt=\"Vlammend Varken logo\">");
+            }
             sb.AppendLine("    <h1>Vlammend Varken</h1>");
             sb.AppendLine("    <p>Menukaart</p>");
             sb.AppendLine("  </header>");
@@ -130,8 +157,7 @@ namespace VlammendVarken
         private static void SchrijfDrankItem(StringBuilder sb, Drank d)
         {
             sb.AppendLine("        <div class=\"drank-item\">");
-            var vegPrefix = d.IsVegetarisch ? "<span class=\"veg-icon\" title=\"vegetarisch\">✿</span>" : string.Empty;
-            sb.AppendLine($"          <div class=\"drank-naam\">{vegPrefix}{WebUtility.HtmlEncode(d.Naam)}</div>");
+            sb.AppendLine($"          <div class=\"drank-naam\">{WebUtility.HtmlEncode(d.Naam)}</div>");
 
             if (d.Ingredienten != null && d.Ingredienten.Count > 0)
             {
@@ -165,7 +191,7 @@ namespace VlammendVarken
             {
                 sb.AppendLine("    <div class=\"item\">");
                 sb.AppendLine("      <div class=\"item-header\">");
-                var vegPrefix = item.IsVegetarisch ? "<span class=\"veg-icon\" title=\"vegetarisch\">✿</span>" : string.Empty;
+                var vegPrefix = item.IsVegetarisch ? VegLeafSvg : string.Empty;
                 sb.AppendLine($"        <span class=\"item-naam\">{vegPrefix}{WebUtility.HtmlEncode(item.Naam)}</span>");
                 sb.AppendLine($"        <span class=\"item-prijs\">{item.Prijs:C}</span>");
                 sb.AppendLine("      </div>");

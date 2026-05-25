@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Vlammend Varken - Menukaart</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background: #f5e6d3;
+            color: #3d1f0f;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #8b3a1a;
+            padding-bottom: 10px;
+            color: #8b3a1a;
+        }
+        .filter-groep {
+            margin: 20px 0;
+        }
+        .filter-label {
+            text-align: center;
+            font-size: 0.85em;
+            color: #6b4423;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .filter-btn {
+            background: #fff8ef;
+            border: 1px solid #8b3a1a;
+            color: #8b3a1a;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9em;
+        }
+        .filter-btn:hover {
+            background: #ead9c4;
+        }
+        .filter-btn.active {
+            background: #8b3a1a;
+            color: #fff8ef;
+        }
+        .gerecht {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px dashed #b58463;
+        }
+        .gerecht.hidden {
+            display: none;
+        }
+        .naam {
+            font-weight: bold;
+        }
+        .seizoen-icon {
+            margin-left: 6px;
+            font-size: 1.1em;
+        }
+        .beschrijving {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #6b4423;
+        }
+        .allergenen {
+            margin-top: 6px;
+            font-size: 0.8em;
+            color: #8b3a1a;
+        }
+        .allergeen-tag {
+            display: inline-block;
+            background: #ead9c4;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 4px;
+        }
+        .prijs {
+            font-weight: bold;
+            color: #8b3a1a;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Restaurant Vlammend Varken</h1>
+
+    <div class="filter-groep">
+        <div class="filter-label">Allergenen</div>
+        <div class="filters" id="allergeen-filters">
+            <button class="filter-btn active" data-filter="alle">Alle</button>
+            <button class="filter-btn" data-filter="gluten">Geen gluten</button>
+            <button class="filter-btn" data-filter="lactose">Geen lactose</button>
+            <button class="filter-btn" data-filter="noten">Geen noten</button>
+            <button class="filter-btn" data-filter="selderij">Geen selderij</button>
+        </div>
+    </div>
+
+    <div class="filter-groep">
+        <div class="filter-label">Seizoen</div>
+        <div class="filters" id="seizoen-filters">
+            <button class="filter-btn active" data-filter="alle">Alle</button>
+            <button class="filter-btn" data-filter="lente">&#127804; Lente</button>
+            <button class="filter-btn" data-filter="zomer">&#9728;&#65039; Zomer</button>
+            <button class="filter-btn" data-filter="herfst">&#127810; Herfst</button>
+            <button class="filter-btn" data-filter="winter">&#10052;&#65039; Winter</button>
+        </div>
+    </div>
+
+    <div class="gerecht" data-allergenen="gluten,lactose,selderij" data-seizoen="herfst,winter">
+        <div>
+            <div class="naam">
+                Gevulde Varkenshaas
+                <span class="seizoen-icon" title="Herfst">&#127810;</span>
+                <span class="seizoen-icon" title="Winter">&#10052;&#65039;</span>
+            </div>
+            <div class="beschrijving">Met spek, champignons en rode wijnsaus</div>
+            <div class="allergenen">
+                <span class="allergeen-tag">gluten</span>
+                <span class="allergeen-tag">lactose</span>
+                <span class="allergeen-tag">selderij</span>
+            </div>
+        </div>
+        <div class="prijs">&euro; 22,50</div>
+    </div>
+
+    <div class="gerecht" data-allergenen="gluten,mosterd" data-seizoen="zomer">
+        <div>
+            <div class="naam">
+                Spareribs Vlammend
+                <span class="seizoen-icon" title="Zomer">&#9728;&#65039;</span>
+            </div>
+            <div class="beschrijving">Pittige marinade, frietjes en coleslaw</div>
+            <div class="allergenen">
+                <span class="allergeen-tag">gluten</span>
+                <span class="allergeen-tag">mosterd</span>
+            </div>
+        </div>
+        <div class="prijs">&euro; 19,95</div>
+    </div>
+
+    <div class="gerecht" data-allergenen="" data-seizoen="lente,herfst">
+        <div>
+            <div class="naam">
+                Buikspek uit de Oven
+                <span class="seizoen-icon" title="Lente">&#127804;</span>
+                <span class="seizoen-icon" title="Herfst">&#127810;</span>
+            </div>
+            <div class="beschrijving">Knapperig gebakken met appelcompote</div>
+            <div class="allergenen">
+                <span class="allergeen-tag">geen</span>
+            </div>
+        </div>
+        <div class="prijs">&euro; 18,75</div>
+    </div>
+
+    <script>
+        const gerechten = document.querySelectorAll('.gerecht');
+        let activeAllergeen = 'alle';
+        let activeSeizoen = 'alle';
+
+        function bindGroup(containerId, onChange) {
+            const buttons = document.querySelectorAll(`#${containerId} .filter-btn`);
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    onChange(btn.dataset.filter);
+                });
+            });
+        }
+
+        function pasFiltersToe() {
+            gerechten.forEach(g => {
+                const allergenen = g.dataset.allergenen.split(',').filter(Boolean);
+                const seizoenen = g.dataset.seizoen.split(',').filter(Boolean);
+
+                const allergeenOk = activeAllergeen === 'alle' || !allergenen.includes(activeAllergeen);
+                const seizoenOk = activeSeizoen === 'alle' || seizoenen.includes(activeSeizoen);
+
+                g.classList.toggle('hidden', !(allergeenOk && seizoenOk));
+            });
+        }
+
+        bindGroup('allergeen-filters', val => { activeAllergeen = val; pasFiltersToe(); });
+        bindGroup('seizoen-filters', val => { activeSeizoen = val; pasFiltersToe(); });
+    </script>
+</body>
+</html>

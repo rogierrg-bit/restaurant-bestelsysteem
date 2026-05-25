@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace VlammendVarken
 {
-    internal class Drank
+    public class Drank : Gerecht
     {
+        public Drank(string naam, decimal prijs, Seizoen seizoen, List<string> allergenen, List<string>? bestanddelen = null, bool vegetarisch = false)
+            : base(naam, prijs, seizoen, allergenen, bestanddelen, vegetarisch)
+        {
+        }
     }
 }

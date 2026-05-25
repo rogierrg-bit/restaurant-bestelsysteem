@@ -1,17 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace VlammendVarken
 {
     public class Hoofdgerecht : Gerecht
     {
-        public bool IsVegetarisch { get; set; }
-
-        public Hoofdgerecht(string naam, decimal prijs, bool vegetarisch)
-            : base(naam, prijs)
+        public Hoofdgerecht(string naam, decimal prijs, Seizoen seizoen, List<string> allergenen, bool vegetarisch, List<string>? ingredienten = null)
+            : base(naam, prijs, seizoen, allergenen, ingredienten, vegetarisch)
         {
-            IsVegetarisch = vegetarisch;
         }
     }
 }

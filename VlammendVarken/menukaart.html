@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Menukaart - Vlammend Varken</title>
+  <style>
+    body { font-family: Georgia, 'Times New Roman', serif; max-width: 780px; margin: 2rem auto; padding: 0 1.5rem; color: #f0f0f0; background: #2b2b2b; }
+    header { text-align: center; border-bottom: 2px solid #f5f0e8; padding-bottom: 1rem; margin-bottom: 2rem; }
+    header h1 { font-size: 2.4rem; margin: 0; letter-spacing: 2px; color: #f5f0e8; }
+    header p { font-style: italic; color: #cfcfcf; margin: 0.25rem 0 0; }
+    section { margin-bottom: 2.5rem; margin-top: 3rem; }
+    section h2 { font-size: 2rem; color: #f5f0e8; text-align: center; margin-top: 2.5rem; margin-bottom: 1.5rem; padding: 0; border: none; letter-spacing: 1px; }
+    .item { margin-bottom: 1.2rem; }
+    .item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; }
+    .item-naam { color: #f0f0f0; }
+    .item-prijs { color: #f5f0e8; }
+    .ingredienten { font-style: italic; color: #8fac6e; margin: 0.2rem 0 0.1rem; }
+    .allergenen { font-size: 0.8rem; color: #888888; }
+    .alcohol { font-size: 0.85rem; color: #c9a87a; font-variant: small-caps; }
+    .veg-icon { color: #6aaa3a; margin-right: 0.35rem; font-size: 1.05em; }
+    .dranken-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .dranken-col-header { font-style: italic; color: #999999; margin-bottom: 0.8rem; font-size: 0.95rem; }
+    .drank-item { margin-bottom: 1.2rem; }
+    .drank-naam { font-weight: bold; color: #f0f0f0; font-size: 1.05rem; }
+    .drank-prijs { text-align: right; color: #f5f0e8; font-weight: bold; margin-top: 0.2rem; }
+    @media (max-width: 600px) { .dranken-grid { grid-template-columns: 1fr; } }
+    footer { text-align: center; font-size: 0.8rem; color: #888888; margin-top: 3rem; border-top: 1px solid #4a4a4a; padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vlammend Varken</h1>
+    <p>Menukaart</p>
+  </header>
+  <section>
+    <h2>Voorgerechten</h2>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Pat&#233; van Varkenslever met Uienconfijt</span>
+        <span class="item-prijs">€ 9,50</span>
+      </div>
+      <div class="ingredienten">varkenslever, rode ui, tijm, cognac, boerenbrood</div>
+      <div class="allergenen">bevat: gluten</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Heldere Bouillon van Mergpijp</span>
+        <span class="item-prijs">€ 7,95</span>
+      </div>
+      <div class="ingredienten">mergpijp, winterpeen, knolselderij, laurier, peterselie</div>
+      <div class="allergenen">bevat: selderij</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Carpaccio van Bietenrood</span>
+        <span class="item-prijs">€ 8,75</span>
+      </div>
+      <div class="ingredienten">rode biet, geitenkaas, walnoot, honing, veldsla</div>
+      <div class="allergenen">bevat: lactose, noten</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Tartaar van Eigen Slacht</span>
+        <span class="item-prijs">€ 11,50</span>
+      </div>
+      <div class="ingredienten">varkenshaas, kwartelei, augurk, kappertjes, mosterd</div>
+      <div class="allergenen">bevat: ei, mosterd</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Gerookte Forel uit Eigen Rokerij</span>
+        <span class="item-prijs">€ 10,25</span>
+      </div>
+      <div class="ingredienten">forel, mierikswortelcr&#232;me, dille, citroen, roggebrood</div>
+      <div class="allergenen">bevat: vis, lactose</div>
+    </div>
+  </section>
+  <section>
+    <h2>Hoofdgerechten</h2>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Gevulde Varkenshaas</span>
+        <span class="item-prijs">€ 22,50</span>
+      </div>
+      <div class="ingredienten">varkenshaas, spek, champignons, rode wijn, tijm</div>
+      <div class="allergenen">bevat: gluten, lactose, selderij</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Spareribs Vlammend</span>
+        <span class="item-prijs">€ 19,95</span>
+      </div>
+      <div class="ingredienten">spareribs, appelstroop, mosterd, paprika, knoflook</div>
+      <div class="allergenen">bevat: gluten, mosterd</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Buikspek uit de Oven</span>
+        <span class="item-prijs">€ 18,75</span>
+      </div>
+      <div class="ingredienten">buikspek, appel, ui, rozemarijn, venkelzaad</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Wild Zwijn Stoofpot</span>
+        <span class="item-prijs">€ 24,50</span>
+      </div>
+      <div class="ingredienten">wild zwijn, rode wijn, jeneverbes, pastinaak, ontbijtkoek</div>
+      <div class="allergenen">bevat: gluten, selderij</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam">Mergpijp Risotto met Knolselderij</span>
+        <span class="item-prijs">€ 21,00</span>
+      </div>
+      <div class="ingredienten">arboriorijst, mergpijp, knolselderij, parmezaan, salie</div>
+      <div class="allergenen">bevat: lactose, selderij</div>
+    </div>
+  </section>
+  <section>
+    <h2>Nagerechten</h2>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Stoofpeertjes met Boerentijm</span>
+        <span class="item-prijs">€ 7,25</span>
+      </div>
+      <div class="ingredienten">stoofpeer, kaneel, rode wijn, tijm, kruidnagel</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Karnemelk Panna Cotta</span>
+        <span class="item-prijs">€ 7,95</span>
+      </div>
+      <div class="ingredienten">karnemelk, room, vanille, aardbei, munt</div>
+      <div class="allergenen">bevat: lactose</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Appel-Walnoot Crumble</span>
+        <span class="item-prijs">€ 7,50</span>
+      </div>
+      <div class="ingredienten">appel, walnoot, havermout, boter, kaneel</div>
+      <div class="allergenen">bevat: gluten, lactose, noten</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Vlierbessen Sorbet</span>
+        <span class="item-prijs">€ 6,75</span>
+      </div>
+      <div class="ingredienten">vlierbes, citroen, rietsuiker, munt</div>
+    </div>
+    <div class="item">
+      <div class="item-header">
+        <span class="item-naam"><span class="veg-icon" title="vegetarisch">✿</span>Speculaas Parfait</span>
+        <span class="item-prijs">€ 8,25</span>
+      </div>
+      <div class="ingredienten">speculaas, room, eierdooier, kaneel, anijs</div>
+      <div class="allergenen">bevat: gluten, lactose, ei</div>
+    </div>
+  </section>
+  <section>
+    <h2>Dranken</h2>
+    <div class="dranken-grid">
+      <div class="dranken-col">
+        <div class="dranken-col-header">alcoholisch</div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Kruidenbitter Veluws</div>
+          <div class="ingredienten">alcohol, wilde tijm, engelwortel, duizendblad</div>
+          <div class="alcohol">35,0% alcohol</div>
+          <div class="drank-prijs">€ 4,50</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Streek Tripel uit Achterhoek</div>
+          <div class="ingredienten">gerst, hop, koriander, sinaasappelschil</div>
+          <div class="alcohol">8,5% alcohol</div>
+          <div class="drank-prijs">€ 5,95</div>
+          <div class="allergenen">bevat: gluten</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Pinot Noir Achterhoek</div>
+          <div class="ingredienten">pinot noir druif</div>
+          <div class="alcohol">12,5% alcohol</div>
+          <div class="drank-prijs">€ 6,75</div>
+          <div class="allergenen">bevat: sulfiet</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Cider van Schurfappels</div>
+          <div class="ingredienten">schurfappel, wilde gist</div>
+          <div class="alcohol">6,0% alcohol</div>
+          <div class="drank-prijs">€ 4,95</div>
+          <div class="allergenen">bevat: sulfiet</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Korenwijn Oude Stijl</div>
+          <div class="ingredienten">rogge, mout, jeneverbes</div>
+          <div class="alcohol">38,0% alcohol</div>
+          <div class="drank-prijs">€ 5,50</div>
+          <div class="allergenen">bevat: gluten</div>
+        </div>
+      </div>
+      <div class="dranken-col">
+        <div class="dranken-col-header">non-alcoholisch</div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Vlierbloesem Limonade</div>
+          <div class="ingredienten">vlierbloesem, citroen, honing, bronwater</div>
+          <div class="drank-prijs">€ 3,75</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Verveine Kruidenthee</div>
+          <div class="ingredienten">citroenverbena, munt, kamille</div>
+          <div class="drank-prijs">€ 3,25</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Karnemelk met Boerenhoning</div>
+          <div class="ingredienten">karnemelk, honing, kaneel</div>
+          <div class="drank-prijs">€ 3,50</div>
+          <div class="allergenen">bevat: lactose</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Streekappel Sap, Troebel</div>
+          <div class="ingredienten">elstar appel, goudreinet</div>
+          <div class="drank-prijs">€ 3,50</div>
+        </div>
+        <div class="drank-item">
+          <div class="drank-naam"><span class="veg-icon" title="vegetarisch">✿</span>Bronwater met Verse Munt</div>
+          <div class="ingredienten">bronwater, munt, limoen</div>
+          <div class="drank-prijs">€ 2,75</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>Bon appétit &mdash; Vlammend Varken</footer>
+</body>
+</html>

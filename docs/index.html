@@ -35,8 +35,8 @@
       box-shadow:0 2px 12px rgba(232,100,44,0.35);
     }
     .lang-toggle:active{background:var(--accent-dark);}
-    .lang-toggle .flag-icon{font-size:1.5rem;line-height:1;display:inline-block;}
-    .lang-toggle .lang-code{font-size:0.85rem;font-weight:700;letter-spacing:0.5px;display:none;}
+    .lang-toggle .flag-icon{width:22px;height:16px;object-fit:cover;border-radius:3px;display:inline-block;flex-shrink:0;}
+    .lang-toggle .lang-code{font-size:0.85rem;font-weight:700;letter-spacing:0.5px;}
     .lang-toggle .arrow{font-size:0.65rem;opacity:0.85;transition:transform 0.25s;margin-left:2px;}
     .lang-wrap.open .arrow{transform:rotate(180deg);}
     .lang-dropdown{
@@ -58,7 +58,7 @@
     .lang-option:last-child{border-bottom:none;}
     .lang-option:hover{background:var(--card);color:var(--text);}
     .lang-option.active{color:var(--accent);background:var(--accent-glow);font-weight:700;}
-    .lang-option .flag{font-size:1.4rem;line-height:1;}
+    .lang-option .flag{width:28px;height:20px;object-fit:cover;border-radius:3px;flex-shrink:0;}
 
     /* CART BTN */
     .cart-btn{position:relative;background:var(--accent);border:none;border-radius:50px;color:#fff;font-weight:600;font-size:0.82rem;padding:8px 15px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;white-space:nowrap;}
@@ -195,17 +195,17 @@
       <!-- LANGUAGE DROPDOWN -->
       <div class="lang-wrap" id="lang-wrap">
         <button class="lang-toggle" id="lang-toggle" onclick="toggleLangMenu()">
-          <span class="flag-icon" id="lang-current-flag">🇳🇱</span>
+          <img class="flag-icon" id="lang-current-flag" src="https://flagcdn.com/w40/nl.png" alt="NL" />
           <span class="lang-code" id="lang-current-label">NL</span>
           <span class="arrow">▼</span>
         </button>
         <div class="lang-dropdown" id="lang-dropdown">
-          <div class="lang-option active" id="opt-nl" onclick="setLang('nl')"><span class="flag">🇳🇱</span> Nederlands</div>
-          <div class="lang-option" id="opt-en" onclick="setLang('en')"><span class="flag">🇬🇧</span> English</div>
-          <div class="lang-option" id="opt-de" onclick="setLang('de')"><span class="flag">🇩🇪</span> Deutsch</div>
-          <div class="lang-option" id="opt-fr" onclick="setLang('fr')"><span class="flag">🇫🇷</span> Français</div>
-          <div class="lang-option" id="opt-es" onclick="setLang('es')"><span class="flag">🇪🇸</span> Español</div>
-          <div class="lang-option" id="opt-it" onclick="setLang('it')"><span class="flag">🇮🇹</span> Italiano</div>
+          <div class="lang-option active" id="opt-nl" onclick="setLang('nl')"><img class="flag" src="https://flagcdn.com/w40/nl.png" alt="NL" /> Nederlands</div>
+          <div class="lang-option" id="opt-en" onclick="setLang('en')"><img class="flag" src="https://flagcdn.com/w40/gb.png" alt="EN" /> English</div>
+          <div class="lang-option" id="opt-de" onclick="setLang('de')"><img class="flag" src="https://flagcdn.com/w40/de.png" alt="DE" /> Deutsch</div>
+          <div class="lang-option" id="opt-fr" onclick="setLang('fr')"><img class="flag" src="https://flagcdn.com/w40/fr.png" alt="FR" /> Français</div>
+          <div class="lang-option" id="opt-es" onclick="setLang('es')"><img class="flag" src="https://flagcdn.com/w40/es.png" alt="ES" /> Español</div>
+          <div class="lang-option" id="opt-it" onclick="setLang('it')"><img class="flag" src="https://flagcdn.com/w40/it.png" alt="IT" /> Italiano</div>
         </div>
       </div>
       <!-- CART -->
@@ -296,9 +296,12 @@
 
     // ── LANGUAGE FLAGS & LABELS ────────────────────────────────────
     const langMeta = {
-      nl:{flag:'🇳🇱',label:'NL'}, en:{flag:'🇬🇧',label:'EN'},
-      de:{flag:'🇩🇪',label:'DE'}, fr:{flag:'🇫🇷',label:'FR'},
-      es:{flag:'🇪🇸',label:'ES'}, it:{flag:'🇮🇹',label:'IT'},
+      nl:{flag:'https://flagcdn.com/w40/nl.png', label:'NL'},
+      en:{flag:'https://flagcdn.com/w40/gb.png', label:'EN'},
+      de:{flag:'https://flagcdn.com/w40/de.png', label:'DE'},
+      fr:{flag:'https://flagcdn.com/w40/fr.png', label:'FR'},
+      es:{flag:'https://flagcdn.com/w40/es.png', label:'ES'},
+      it:{flag:'https://flagcdn.com/w40/it.png', label:'IT'},
     };
 
     // ── UI TRANSLATIONS ────────────────────────────────────────────
@@ -436,7 +439,8 @@
     function setLang(lang){
       currentLang=lang;
       const m=langMeta[lang];
-      document.getElementById('lang-current-flag').textContent=m.flag;
+      const flagEl=document.getElementById('lang-current-flag');
+      flagEl.src=m.flag; flagEl.alt=m.label;
       document.getElementById('lang-current-label').textContent=m.label;
       document.querySelectorAll('.lang-option').forEach(o=>o.classList.remove('active'));
       document.getElementById(`opt-${lang}`).classList.add('active');

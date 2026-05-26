@@ -33,6 +33,24 @@
       position: relative;
     }
 
+    /* DESKTOP LAYOUT */
+    @media (min-width: 768px) {
+      body { max-width: 900px; }
+      .hero { padding: 40px 32px 30px; border-radius: 0 0 16px 16px; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero p { font-size: 1rem; }
+      .tabs-wrapper { top: 67px; }
+      .tabs { justify-content: center; overflow-x: visible; }
+      .tab-btn { padding: 15px 24px; font-size: 0.9rem; }
+      .menu-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 18px; }
+      .section-header { padding: 24px 18px 14px; }
+      .section-title { font-size: 1.2rem; }
+      header { padding: 18px 24px; }
+      .header-logo { font-size: 1.35rem; }
+      #cart-panel { max-width: 520px; border-radius: 20px; margin: auto; }
+      #cart-overlay { align-items: center; }
+    }
+
     /* HEADER */
     header {
       position: sticky; top: 0; z-index: 100;
@@ -138,6 +156,12 @@
       background: #2a1a10; border: 1px solid #3d2210;
       color: #c87d4a; font-size: 0.65rem; font-weight: 600;
       padding: 2px 7px; border-radius: 4px;
+    }
+    .veg-badge {
+      background: #0d2e17; border: 1px solid #1a5c2e;
+      color: #4caf72; font-size: 0.68rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px;
+      display: inline-flex; align-items: center; gap: 3px;
     }
     .add-btn {
       background: var(--accent); border: none; border-radius: 50px;
@@ -402,7 +426,7 @@
           { id: 2, naam: 'Heldere Bouillon van Mergpijp', prijs: 7.95,
             beschrijving: 'mergpijp, winterpeen, knolselderij, peterselie', allergenen: [] },
           { id: 3, naam: 'Carpaccio van Bietenrood', prijs: 8.50,
-            beschrijving: 'rode biet, geitenkaas, walnoot, rucola, balsamico', allergenen: ['noten', 'lactose'] },
+            beschrijving: 'rode biet, geitenkaas, walnoot, rucola, balsamico', allergenen: ['noten', 'lactose'], vegetarisch: true },
           { id: 4, naam: 'Krokante Zuurkoolsoep', prijs: 6.95,
             beschrijving: 'zuurkool, spek, aardappel, roggebroodcroutons', allergenen: ['gluten'] },
           { id: 5, naam: 'Gegrilde Crostini met Lardo', prijs: 8.25,
@@ -432,11 +456,11 @@
           { id: 12, naam: 'Appelflap met Kaneel IJs', prijs: 6.95,
             beschrijving: 'bladerdeegspeek, appelvulling, kaneelijs, karamel', allergenen: ['gluten', 'lactose', 'ei'] },
           { id: 13, naam: 'Chocolade Lava Cake', prijs: 8.25,
-            beschrijving: 'pure chocolade, vloeibare kern, vanilleijs, frambozen', allergenen: ['gluten', 'ei', 'lactose'] },
+            beschrijving: 'pure chocolade, vloeibare kern, vanilleijs, frambozen', allergenen: ['gluten', 'ei', 'lactose'], vegetarisch: true },
           { id: 14, naam: 'Seizoensfruit met Sabayon', prijs: 6.50,
-            beschrijving: 'vers seizoensfruit, warme sabayonsaus, munt', allergenen: ['ei'] },
+            beschrijving: 'vers seizoensfruit, warme sabayonsaus, munt', allergenen: ['ei'], vegetarisch: true },
           { id: 15, naam: 'Kaasplankje', prijs: 11.50,
-            beschrijving: 'selectie van 4 kazen, druiven, vijgenjam, noten, crackers', allergenen: ['lactose', 'gluten', 'noten'] },
+            beschrijving: 'selectie van 4 kazen, druiven, vijgenjam, noten, crackers', allergenen: ['lactose', 'gluten', 'noten'], vegetarisch: true },
         ]
       },
       dranken: {
@@ -449,11 +473,11 @@
           { id: 18, naam: 'Craft Bier Vlammend (33cl)', prijs: 4.25,
             beschrijving: 'huisbrouwerij amber ale, licht rokerig', allergenen: ['gluten'] },
           { id: 19, naam: 'Frisdrank', prijs: 2.75,
-            beschrijving: 'cola, fanta, sprite, ice tea — naar keuze', allergenen: [] },
+            beschrijving: 'cola, fanta, sprite, ice tea — naar keuze', allergenen: [], vegetarisch: true },
           { id: 20, naam: 'Spa Rood / Blauw', prijs: 2.50,
-            beschrijving: 'bruisend of stil mineraalwater', allergenen: [] },
+            beschrijving: 'bruisend of stil mineraalwater', allergenen: [], vegetarisch: true },
           { id: 21, naam: 'Koffie of Thee', prijs: 2.95,
-            beschrijving: 'espresso, cappuccino, latte, of selectie thee', allergenen: ['lactose'] },
+            beschrijving: 'espresso, cappuccino, latte, of selectie thee', allergenen: ['lactose'], vegetarisch: true },
         ]
       }
     };
@@ -496,6 +520,7 @@
 
     function renderCard(item) {
       const tags = item.allergenen.map(a => `<span class="allergen-tag">${a}</span>`).join('');
+      const vegBadge = item.vegetarisch ? `<span class="veg-badge">🌿 Vegetarisch</span>` : '';
       return `
         <div class="menu-card" id="card-${item.id}">
           <div class="card-top">
@@ -504,7 +529,7 @@
           </div>
           <div class="card-desc">${item.beschrijving}</div>
           <div class="card-bottom">
-            <div class="allergens">${tags}</div>
+            <div class="allergens">${vegBadge}${tags}</div>
             <button class="add-btn" onclick="addToCart(${item.id})">+ Voeg toe</button>
           </div>
         </div>`;

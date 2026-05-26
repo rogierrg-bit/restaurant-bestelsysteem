@@ -6,321 +6,149 @@
   <title>Vlammend Varken</title>
   <style>
     :root {
-      --bg: #0f0d0b;
-      --surface: #1a1714;
-      --card: #231f1b;
-      --border: #2e2820;
-      --accent: #e8642c;
-      --accent-dark: #c44f1e;
-      --accent-glow: rgba(232,100,44,0.18);
-      --gold: #f0a500;
-      --text: #f0ebe4;
-      --text-muted: #8a7f75;
-      --text-dim: #4a4138;
-      --success: #4caf72;
-      --radius: 14px;
-      --radius-sm: 8px;
+      --bg:#0f0d0b;--surface:#1a1714;--card:#231f1b;--border:#2e2820;
+      --accent:#e8642c;--accent-dark:#c44f1e;--accent-glow:rgba(232,100,44,0.18);
+      --gold:#f0a500;--text:#f0ebe4;--text-muted:#8a7f75;--text-dim:#4a4138;
+      --success:#4caf72;--radius:14px;--radius-sm:8px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      max-width: 480px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    /* DESKTOP LAYOUT */
-    @media (min-width: 768px) {
-      body { max-width: 900px; }
-      .hero { padding: 40px 32px 30px; border-radius: 0 0 16px 16px; }
-      .hero h1 { font-size: 2.4rem; }
-      .hero p { font-size: 1rem; }
-      .tabs-wrapper { top: 67px; }
-      .tabs { justify-content: center; overflow-x: visible; }
-      .tab-btn { padding: 15px 24px; font-size: 0.9rem; }
-      .menu-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 18px; }
-      .section-header { padding: 24px 18px 14px; }
-      .section-title { font-size: 1.2rem; }
-      header { padding: 18px 24px; }
-      .header-logo { font-size: 1.35rem; }
-      #cart-panel { max-width: 520px; border-radius: 20px; margin: auto; }
-      #cart-overlay { align-items: center; }
-    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;max-width:480px;margin:0 auto;position:relative;}
 
     /* HEADER */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(15,13,11,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .header-left { display: flex; flex-direction: column; }
-    .header-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.3px; }
-    .header-tafel { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
-    .cart-btn {
-      position: relative;
-      background: var(--accent);
-      border: none; border-radius: 50px;
-      color: #fff; font-weight: 600; font-size: 0.85rem;
-      padding: 9px 18px; cursor: pointer;
-      display: flex; align-items: center; gap: 8px;
-      transition: background 0.2s;
-    }
-    .cart-btn:active { background: var(--accent-dark); }
-    .cart-icon { font-size: 1rem; }
-    .cart-badge {
-      position: absolute; top: -6px; right: -6px;
-      background: var(--gold); color: #000;
-      font-size: 0.7rem; font-weight: 700;
-      width: 20px; height: 20px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      display: none;
-    }
+    header{position:sticky;top:0;z-index:100;background:rgba(15,13,11,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+    .header-left{display:flex;align-items:center;gap:10px;}
+    .header-logo-img{width:44px;height:44px;object-fit:contain;}
+    .header-text{display:flex;flex-direction:column;}
+    .header-name{font-size:1.1rem;font-weight:800;color:var(--accent);letter-spacing:0.2px;}
+    .header-tafel{font-size:0.7rem;color:var(--text-muted);margin-top:1px;}
+    .header-right{display:flex;align-items:center;gap:8px;}
 
-    /* HERO BANNER */
-    .hero {
-      background: linear-gradient(135deg, #1a0f08 0%, #2d1505 50%, #1a0f08 100%);
-      padding: 28px 18px 22px;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero h1 { font-size: 1.7rem; font-weight: 800; line-height: 1.2; }
-    .hero h1 span { color: var(--accent); }
-    .hero p { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
-    .hero-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-    .hero-tag {
-      background: var(--accent-glow); border: 1px solid var(--accent);
-      color: var(--accent); font-size: 0.72rem; font-weight: 600;
-      padding: 4px 10px; border-radius: 50px; letter-spacing: 0.3px;
-    }
+    /* LANGUAGE DROPDOWN */
+    .lang-wrap{position:relative;}
+    .lang-toggle{background:var(--card);border:1px solid var(--border);color:var(--text);font-size:0.8rem;font-weight:600;padding:7px 11px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+    .lang-toggle .arrow{font-size:0.6rem;color:var(--text-muted);transition:transform 0.2s;}
+    .lang-wrap.open .arrow{transform:rotate(180deg);}
+    .lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);min-width:160px;z-index:200;overflow:hidden;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+    .lang-wrap.open .lang-dropdown{display:block;}
+    .lang-option{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:background 0.15s;}
+    .lang-option:hover{background:var(--card);}
+    .lang-option.active{color:var(--accent);background:var(--accent-glow);}
+    .lang-option .flag{font-size:1.1rem;}
 
-    /* CATEGORY TABS */
-    .tabs-wrapper {
-      position: sticky; top: 59px; z-index: 99;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
-    .tabs {
-      display: flex; overflow-x: auto; gap: 0;
-      scrollbar-width: none; -webkit-overflow-scrolling: touch;
-    }
-    .tabs::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      flex-shrink: 0;
-      background: none; border: none;
-      color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
-      padding: 13px 16px; cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s; white-space: nowrap;
-    }
-    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    /* CART BTN */
+    .cart-btn{position:relative;background:var(--accent);border:none;border-radius:50px;color:#fff;font-weight:600;font-size:0.82rem;padding:8px 15px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;white-space:nowrap;}
+    .cart-btn:active{background:var(--accent-dark);}
+    .cart-badge{position:absolute;top:-6px;right:-6px;background:var(--gold);color:#000;font-size:0.68rem;font-weight:700;width:19px;height:19px;border-radius:50%;display:none;align-items:center;justify-content:center;}
 
-    /* MENU SECTIONS */
-    .menu-content { padding: 0 0 120px; }
-    .menu-section { display: none; }
-    .menu-section.active { display: block; }
-    .section-header {
-      padding: 20px 18px 12px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-icon { font-size: 1.4rem; }
-    .section-title { font-size: 1.1rem; font-weight: 700; }
-    .section-count { font-size: 0.75rem; color: var(--text-muted); margin-left: auto; }
+    /* HERO */
+    .hero{background:linear-gradient(135deg,#1a0f08 0%,#2d1505 50%,#1a0f08 100%);padding:26px 18px 20px;border-bottom:1px solid var(--border);}
+    .hero h1{font-size:1.65rem;font-weight:800;line-height:1.2;}
+    .hero h1 span{color:var(--accent);}
+    .hero p{color:var(--text-muted);font-size:0.85rem;margin-top:6px;}
+    .hero-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+    .hero-tag{background:var(--accent-glow);border:1px solid var(--accent);color:var(--accent);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:50px;}
 
-    /* MENU CARDS */
-    .menu-list { padding: 0 12px; display: flex; flex-direction: column; gap: 10px; }
-    .menu-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      display: flex; flex-direction: column; gap: 8px;
-      transition: border-color 0.2s;
-    }
-    .menu-card:active { border-color: var(--accent); }
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-    .card-name { font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
-    .card-price {
-      font-size: 1rem; font-weight: 800; color: var(--accent);
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .card-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
-    .card-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .allergens { display: flex; gap: 4px; flex-wrap: wrap; }
-    .allergen-tag {
-      background: #2a1a10; border: 1px solid #3d2210;
-      color: #c87d4a; font-size: 0.65rem; font-weight: 600;
-      padding: 2px 7px; border-radius: 4px;
-    }
-    .veg-badge {
-      background: #0d2e17; border: 1px solid #1a5c2e;
-      color: #4caf72; font-size: 0.68rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 4px;
-      display: inline-flex; align-items: center; gap: 3px;
-    }
-    .add-btn {
-      background: var(--accent); border: none; border-radius: 50px;
-      color: #fff; font-size: 0.78rem; font-weight: 700;
-      padding: 7px 16px; cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      flex-shrink: 0;
-    }
-    .add-btn:active { background: var(--accent-dark); transform: scale(0.96); }
+    /* TABS */
+    .tabs-wrapper{position:sticky;top:65px;z-index:99;background:var(--bg);border-bottom:1px solid var(--border);}
+    .tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab-btn{flex-shrink:0;background:none;border:none;color:var(--text-muted);font-size:0.82rem;font-weight:600;padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+    .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
 
-    /* TOAST NOTIFICATION */
-    #toast {
-      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: var(--success); color: #fff;
-      font-size: 0.85rem; font-weight: 600;
-      padding: 10px 20px; border-radius: 50px;
-      opacity: 0; transition: all 0.3s ease;
-      z-index: 200; white-space: nowrap;
-      pointer-events: none;
-    }
-    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* MENU */
+    .menu-content{padding:0 0 120px;}
+    .menu-section{display:none;}
+    .menu-section.active{display:block;}
+    .section-header{padding:20px 18px 12px;display:flex;align-items:center;gap:10px;}
+    .section-icon{font-size:1.4rem;}
+    .section-title{font-size:1.1rem;font-weight:700;}
+    .section-count{font-size:0.75rem;color:var(--text-muted);margin-left:auto;}
+    .menu-list{padding:0 12px;display:flex;flex-direction:column;gap:10px;}
+    .menu-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:8px;}
+    .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+    .card-name{font-size:0.95rem;font-weight:700;line-height:1.3;}
+    .card-price{font-size:1rem;font-weight:800;color:var(--accent);white-space:nowrap;flex-shrink:0;}
+    .card-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.5;}
+    .card-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+    .allergens{display:flex;gap:4px;flex-wrap:wrap;}
+    .allergen-tag{background:#2a1a10;border:1px solid #3d2210;color:#c87d4a;font-size:0.65rem;font-weight:600;padding:2px 7px;border-radius:4px;}
+    .veg-badge{background:#0d2e17;border:1px solid #1a5c2e;color:#4caf72;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-flex;align-items:center;gap:3px;}
+    .add-btn{background:var(--accent);border:none;border-radius:50px;color:#fff;font-size:0.78rem;font-weight:700;padding:7px 16px;cursor:pointer;transition:background 0.15s,transform 0.1s;flex-shrink:0;}
+    .add-btn:active{background:var(--accent-dark);transform:scale(0.96);}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--success);color:#fff;font-size:0.85rem;font-weight:600;padding:10px 20px;border-radius:50px;opacity:0;transition:all 0.3s ease;z-index:300;white-space:nowrap;pointer-events:none;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
     /* CART PANEL */
-    #cart-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-      z-index: 300; display: none; align-items: flex-end;
-    }
-    #cart-overlay.open { display: flex; }
-    #cart-panel {
-      background: var(--surface);
-      border-radius: 20px 20px 0 0;
-      width: 100%; max-width: 480px; margin: 0 auto;
-      max-height: 85vh; display: flex; flex-direction: column;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
-    }
-    #cart-overlay.open #cart-panel { transform: translateY(0); }
-    .cart-handle { display: flex; justify-content: center; padding: 12px; }
-    .cart-handle-bar { width: 40px; height: 4px; background: var(--border); border-radius: 2px; }
-    .cart-header {
-      padding: 0 18px 14px;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .cart-title { font-size: 1.1rem; font-weight: 700; }
-    .cart-close-btn {
-      background: var(--border); border: none; color: var(--text-muted);
-      width: 30px; height: 30px; border-radius: 50%;
-      cursor: pointer; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cart-items { flex: 1; overflow-y: auto; padding: 12px 18px; }
-    .cart-empty {
-      text-align: center; color: var(--text-muted); padding: 40px 20px;
-      font-size: 0.9rem;
-    }
-    .cart-empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
-    .cart-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 0; border-bottom: 1px solid var(--border);
-    }
-    .cart-item:last-child { border-bottom: none; }
-    .cart-item-info { flex: 1; }
-    .cart-item-name { font-size: 0.88rem; font-weight: 600; }
-    .cart-item-price { font-size: 0.8rem; color: var(--accent); margin-top: 2px; }
-    .qty-controls { display: flex; align-items: center; gap: 8px; }
-    .qty-btn {
-      background: var(--border); border: none; color: var(--text);
-      width: 28px; height: 28px; border-radius: 50%;
-      cursor: pointer; font-size: 1rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .qty-btn.minus { color: var(--accent); }
-    .qty-num { font-size: 0.9rem; font-weight: 700; min-width: 18px; text-align: center; }
-    .cart-footer {
-      padding: 14px 18px;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .cart-totaal {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 14px;
-    }
-    .cart-totaal-label { font-size: 0.9rem; color: var(--text-muted); }
-    .cart-totaal-amount { font-size: 1.3rem; font-weight: 800; color: var(--accent); }
-    .bestel-btn {
-      width: 100%; background: var(--accent); border: none;
-      color: #fff; font-size: 1rem; font-weight: 700;
-      padding: 15px; border-radius: var(--radius);
-      cursor: pointer; transition: background 0.2s;
-      letter-spacing: 0.3px;
-    }
-    .bestel-btn:active { background: var(--accent-dark); }
-    .bestel-btn:disabled { background: var(--text-dim); cursor: not-allowed; }
+    #cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;display:none;align-items:flex-end;}
+    #cart-overlay.open{display:flex;}
+    #cart-panel{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-width:480px;margin:0 auto;max-height:85vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+    #cart-overlay.open #cart-panel{transform:translateY(0);}
+    .cart-handle{display:flex;justify-content:center;padding:12px;}
+    .cart-handle-bar{width:40px;height:4px;background:var(--border);border-radius:2px;}
+    .cart-header{padding:0 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .cart-title{font-size:1.1rem;font-weight:700;}
+    .cart-close-btn{background:var(--border);border:none;color:var(--text-muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+    .cart-items{flex:1;overflow-y:auto;padding:12px 18px;}
+    .cart-empty{text-align:center;color:var(--text-muted);padding:40px 20px;font-size:0.9rem;}
+    .cart-empty-icon{font-size:2.5rem;margin-bottom:10px;}
+    .cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+    .cart-item:last-child{border-bottom:none;}
+    .cart-item-info{flex:1;}
+    .cart-item-name{font-size:0.88rem;font-weight:600;}
+    .cart-item-price{font-size:0.8rem;color:var(--accent);margin-top:2px;}
+    .qty-controls{display:flex;align-items:center;gap:8px;}
+    .qty-btn{background:var(--border);border:none;color:var(--text);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+    .qty-btn.minus{color:var(--accent);}
+    .qty-num{font-size:0.9rem;font-weight:700;min-width:18px;text-align:center;}
+    .cart-footer{padding:14px 18px;border-top:1px solid var(--border);background:var(--surface);}
+    .cart-totaal{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+    .cart-totaal-label{font-size:0.9rem;color:var(--text-muted);}
+    .cart-totaal-amount{font-size:1.3rem;font-weight:800;color:var(--accent);}
+    .bestel-btn{width:100%;background:var(--accent);border:none;color:#fff;font-size:1rem;font-weight:700;padding:15px;border-radius:var(--radius);cursor:pointer;transition:background 0.2s;}
+    .bestel-btn:active{background:var(--accent-dark);}
+    .bestel-btn:disabled{background:var(--text-dim);cursor:not-allowed;}
 
-    /* BEVESTIGING MODAL */
-    #confirm-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-      z-index: 400; display: none;
-      align-items: center; justify-content: center; padding: 24px;
-    }
-    #confirm-modal.open { display: flex; }
-    .modal-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 28px 22px;
-      width: 100%; max-width: 360px; text-align: center;
-      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    @keyframes popIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .modal-icon { font-size: 3rem; margin-bottom: 12px; }
-    .modal-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
-    .modal-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
-    .modal-tafel-badge {
-      background: var(--accent-glow); border: 1px solid var(--accent);
-      color: var(--accent); font-weight: 700; font-size: 1rem;
-      padding: 10px 20px; border-radius: 10px; margin-bottom: 20px; display: inline-block;
-    }
-    .modal-btns { display: flex; gap: 10px; }
-    .modal-btn-cancel {
-      flex: 1; background: var(--border); border: none; color: var(--text);
-      font-size: 0.9rem; font-weight: 600; padding: 13px;
-      border-radius: var(--radius-sm); cursor: pointer;
-    }
-    .modal-btn-confirm {
-      flex: 2; background: var(--accent); border: none; color: #fff;
-      font-size: 0.9rem; font-weight: 700; padding: 13px;
-      border-radius: var(--radius-sm); cursor: pointer;
-    }
+    /* CONFIRM MODAL */
+    #confirm-modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:none;align-items:center;justify-content:center;padding:24px;}
+    #confirm-modal.open{display:flex;}
+    .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 22px;width:100%;max-width:360px;text-align:center;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+    @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
+    .modal-icon{font-size:3rem;margin-bottom:12px;}
+    .modal-title{font-size:1.2rem;font-weight:800;margin-bottom:6px;}
+    .modal-subtitle{font-size:0.85rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5;}
+    .modal-tafel-badge{background:var(--accent-glow);border:1px solid var(--accent);color:var(--accent);font-weight:700;font-size:1rem;padding:10px 20px;border-radius:10px;margin-bottom:20px;display:inline-block;}
+    .modal-btns{display:flex;gap:10px;}
+    .modal-btn-cancel{flex:1;background:var(--border);border:none;color:var(--text);font-size:0.9rem;font-weight:600;padding:13px;border-radius:var(--radius-sm);cursor:pointer;}
+    .modal-btn-confirm{flex:2;background:var(--accent);border:none;color:#fff;font-size:0.9rem;font-weight:700;padding:13px;border-radius:var(--radius-sm);cursor:pointer;}
 
-    /* BESTELLING GEPLAATST SCREEN */
-    #succes-modal {
-      position: fixed; inset: 0; background: var(--bg);
-      z-index: 500; display: none;
-      align-items: center; justify-content: center; padding: 24px;
-    }
-    #succes-modal.open { display: flex; }
-    .succes-box { text-align: center; max-width: 320px; }
-    .succes-icon { font-size: 4rem; margin-bottom: 16px; animation: bounce 0.6s ease; }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      40% { transform: translateY(-16px); }
-      70% { transform: translateY(-8px); }
-    }
-    .succes-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
-    .succes-title span { color: var(--accent); }
-    .succes-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
-    .succes-tafel {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 16px; margin-bottom: 24px;
-    }
-    .succes-tafel-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
-    .succes-tafel-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
-    .succes-back-btn {
-      background: var(--accent); border: none; color: #fff;
-      font-size: 0.95rem; font-weight: 700; padding: 14px 32px;
-      border-radius: var(--radius); cursor: pointer;
+    /* SUCCES */
+    #succes-modal{position:fixed;inset:0;background:var(--bg);z-index:600;display:none;align-items:center;justify-content:center;padding:24px;}
+    #succes-modal.open{display:flex;}
+    .succes-box{text-align:center;max-width:320px;}
+    .succes-icon{font-size:4rem;margin-bottom:16px;animation:bounce 0.6s ease;}
+    @keyframes bounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-16px);}70%{transform:translateY(-8px);}}
+    .succes-title{font-size:1.5rem;font-weight:800;margin-bottom:8px;}
+    .succes-title span{color:var(--accent);}
+    .succes-text{font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin-bottom:24px;}
+    .succes-tafel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:24px;}
+    .succes-tafel-label{font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;}
+    .succes-tafel-num{font-size:1.8rem;font-weight:800;color:var(--accent);}
+    .succes-back-btn{background:var(--accent);border:none;color:#fff;font-size:0.95rem;font-weight:700;padding:14px 32px;border-radius:var(--radius);cursor:pointer;}
+
+    /* DESKTOP */
+    @media(min-width:768px){
+      body{max-width:960px;}
+      header{padding:12px 24px;}
+      .tabs-wrapper{top:70px;}
+      .tabs{justify-content:center;overflow-x:visible;}
+      .tab-btn{padding:15px 24px;font-size:0.9rem;}
+      .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 18px;}
+      .section-header{padding:24px 18px 14px;}
+      #cart-panel{max-width:520px;border-radius:20px;margin:auto;}
+      #cart-overlay{align-items:center;}
     }
   </style>
 </head>
@@ -329,41 +157,60 @@
   <!-- HEADER -->
   <header>
     <div class="header-left">
-      <span class="header-logo">🔥 Vlammend Varken</span>
-      <span class="header-tafel" id="tafel-label">Tafel laden...</span>
+      <img class="header-logo-img" src="https://storage.googleapis.com/dall-e-images/a4RYyeSDM3UJVh6qT8HifFlFNtt2%2F29ddc387-8b86-4d7a-969e-de449bab9401.png" alt="Vlammend Varken logo" />
+      <div class="header-text">
+        <span class="header-name">Vlammend Varken</span>
+        <span class="header-tafel" id="tafel-label">Tafel laden...</span>
+      </div>
     </div>
-    <button class="cart-btn" onclick="openCart()">
-      <span class="cart-icon">🛒</span>
-      <span id="cart-btn-label">Bestelling</span>
-      <span class="cart-badge" id="cart-badge">0</span>
-    </button>
+    <div class="header-right">
+      <!-- LANGUAGE DROPDOWN -->
+      <div class="lang-wrap" id="lang-wrap">
+        <button class="lang-toggle" id="lang-toggle" onclick="toggleLangMenu()">
+          <span id="lang-current-flag">🇳🇱</span>
+          <span id="lang-current-label">NL</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <div class="lang-option active" id="opt-nl" onclick="setLang('nl')"><span class="flag">🇳🇱</span> Nederlands</div>
+          <div class="lang-option" id="opt-en" onclick="setLang('en')"><span class="flag">🇬🇧</span> English</div>
+          <div class="lang-option" id="opt-de" onclick="setLang('de')"><span class="flag">🇩🇪</span> Deutsch</div>
+          <div class="lang-option" id="opt-fr" onclick="setLang('fr')"><span class="flag">🇫🇷</span> Français</div>
+          <div class="lang-option" id="opt-es" onclick="setLang('es')"><span class="flag">🇪🇸</span> Español</div>
+          <div class="lang-option" id="opt-it" onclick="setLang('it')"><span class="flag">🇮🇹</span> Italiano</div>
+        </div>
+      </div>
+      <!-- CART -->
+      <button class="cart-btn" onclick="openCart()">
+        🛒 <span id="cart-btn-label">Bestelling</span>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+    </div>
   </header>
 
   <!-- HERO -->
   <div class="hero">
-    <h1>Welkom bij<br /><span>Vlammend Varken</span></h1>
-    <p>Bekijk het menu, voeg toe en bestel direct vanaf tafel.</p>
+    <h1 id="hero-title">Welkom bij<br /><span>Vlammend Varken</span></h1>
+    <p id="hero-sub">Bekijk het menu, voeg toe en bestel direct vanaf tafel.</p>
     <div class="hero-tags">
-      <span class="hero-tag">🐷 Vlees specialist</span>
-      <span class="hero-tag">🔥 Verse grill</span>
-      <span class="hero-tag">📱 Bestel zelf</span>
+      <span class="hero-tag" id="hero-tag1">🐷 Vlees specialist</span>
+      <span class="hero-tag" id="hero-tag2">🔥 Verse grill</span>
+      <span class="hero-tag" id="hero-tag3">📱 Bestel zelf</span>
     </div>
   </div>
 
-  <!-- CATEGORY TABS -->
+  <!-- TABS -->
   <div class="tabs-wrapper">
     <div class="tabs" id="tabs">
-      <button class="tab-btn active" onclick="switchTab('voorgerechten', this)">🥗 Voorgerechten</button>
-      <button class="tab-btn" onclick="switchTab('hoofdgerechten', this)">🍖 Hoofdgerechten</button>
-      <button class="tab-btn" onclick="switchTab('nagerechten', this)">🍮 Nagerechten</button>
-      <button class="tab-btn" onclick="switchTab('dranken', this)">🥂 Dranken</button>
+      <button class="tab-btn active" id="tab-voor" onclick="switchTab('voorgerechten',this)">🥗 Voorgerechten</button>
+      <button class="tab-btn" id="tab-hoofd" onclick="switchTab('hoofdgerechten',this)">🍖 Hoofdgerechten</button>
+      <button class="tab-btn" id="tab-na" onclick="switchTab('nagerechten',this)">🍮 Nagerechten</button>
+      <button class="tab-btn" id="tab-drank" onclick="switchTab('dranken',this)">🥂 Dranken</button>
     </div>
   </div>
 
   <!-- MENU CONTENT -->
-  <div class="menu-content" id="menu-content">
-    <!-- Sections injected by JS -->
-  </div>
+  <div class="menu-content" id="menu-content"></div>
 
   <!-- TOAST -->
   <div id="toast">✓ Toegevoegd aan bestelling</div>
@@ -373,30 +220,30 @@
     <div id="cart-panel">
       <div class="cart-handle"><div class="cart-handle-bar"></div></div>
       <div class="cart-header">
-        <span class="cart-title">🛒 Jouw bestelling</span>
+        <span class="cart-title" id="cart-title">🛒 Jouw bestelling</span>
         <button class="cart-close-btn" onclick="closeCart()">✕</button>
       </div>
       <div class="cart-items" id="cart-items-list"></div>
       <div class="cart-footer">
         <div class="cart-totaal">
-          <span class="cart-totaal-label">Totaal</span>
+          <span class="cart-totaal-label" id="cart-totaal-label">Totaal</span>
           <span class="cart-totaal-amount" id="cart-total">€ 0,00</span>
         </div>
-        <button class="bestel-btn" id="bestel-btn" onclick="openConfirm()">🍽️ Bestelling plaatsen</button>
+        <button class="bestel-btn" id="bestel-btn" onclick="openConfirm()" disabled>🍽️ Bestelling plaatsen</button>
       </div>
     </div>
   </div>
 
-  <!-- BEVESTIGING MODAL -->
+  <!-- CONFIRM MODAL -->
   <div id="confirm-modal">
     <div class="modal-box">
       <div class="modal-icon">🍽️</div>
-      <div class="modal-title">Bestelling plaatsen?</div>
-      <div class="modal-subtitle">Jouw bestelling wordt direct doorgezonden naar de keuken.</div>
-      <div class="modal-tafel-badge" id="modal-tafel-text">Tafel ?</div>
+      <div class="modal-title" id="modal-title">Bestelling plaatsen?</div>
+      <div class="modal-subtitle" id="modal-sub">Jouw bestelling wordt direct doorgezonden naar de keuken.</div>
+      <div class="modal-tafel-badge" id="modal-tafel">Tafel ?</div>
       <div class="modal-btns">
-        <button class="modal-btn-cancel" onclick="closeConfirm()">Annuleer</button>
-        <button class="modal-btn-confirm" onclick="plaatsOrder()">Ja, bestel!</button>
+        <button class="modal-btn-cancel" id="modal-cancel" onclick="closeConfirm()">Annuleer</button>
+        <button class="modal-btn-confirm" id="modal-confirm" onclick="plaatsOrder()">Ja, bestel!</button>
       </div>
     </div>
   </div>
@@ -405,251 +252,282 @@
   <div id="succes-modal">
     <div class="succes-box">
       <div class="succes-icon">🎉</div>
-      <div class="succes-title">Bestelling <span>geplaatst!</span></div>
-      <p class="succes-text">De keuken is aan de slag gegaan met jouw bestelling. Even geduld — het lekkers komt eraan!</p>
+      <div class="succes-title" id="succes-title">Bestelling <span>geplaatst!</span></div>
+      <p class="succes-text" id="succes-text">De keuken is aan de slag gegaan met jouw bestelling. Even geduld — het lekkers komt eraan!</p>
       <div class="succes-tafel">
-        <div class="succes-tafel-label">Jouw tafel</div>
+        <div class="succes-tafel-label" id="succes-tafel-label">Jouw tafel</div>
         <div class="succes-tafel-num" id="succes-tafel-num">?</div>
       </div>
-      <button class="succes-back-btn" onclick="nieuweBestelling()">📋 Nieuw bestellen</button>
+      <button class="succes-back-btn" id="succes-back" onclick="nieuweBestelling()">📋 Nieuw bestellen</button>
     </div>
   </div>
 
   <script>
-    // ─── MENU DATA ───────────────────────────────────────────────
-    const menuData = {
-      voorgerechten: {
-        icon: '🥗', label: 'Voorgerechten',
-        items: [
-          { id: 1, naam: 'Paté van Varkenslever met Uienconfijt', prijs: 9.50,
-            beschrijving: 'varkenslever, rode ui, tijm, cognac, boerenbrood', allergenen: ['gluten'] },
-          { id: 2, naam: 'Heldere Bouillon van Mergpijp', prijs: 7.95,
-            beschrijving: 'mergpijp, winterpeen, knolselderij, peterselie', allergenen: [] },
-          { id: 3, naam: 'Carpaccio van Bietenrood', prijs: 8.50,
-            beschrijving: 'rode biet, geitenkaas, walnoot, rucola, balsamico', allergenen: ['noten', 'lactose'], vegetarisch: true },
-          { id: 4, naam: 'Krokante Zuurkoolsoep', prijs: 6.95,
-            beschrijving: 'zuurkool, spek, aardappel, roggebroodcroutons', allergenen: ['gluten'] },
-          { id: 5, naam: 'Gegrilde Crostini met Lardo', prijs: 8.25,
-            beschrijving: 'lardo, rozemarijn, knoflook, zuurdesembrood', allergenen: ['gluten'] },
-        ]
-      },
-      hoofdgerechten: {
-        icon: '🍖', label: 'Hoofdgerechten',
-        items: [
-          { id: 6, naam: 'Spareribs van de Grill', prijs: 22.50,
-            beschrijving: 'varkensribbetjes, huisgemaakt BBQ-glazuur, coleslaw, friet', allergenen: ['gluten'] },
-          { id: 7, naam: 'Wild Zwijn Stoofpot', prijs: 24.95,
-            beschrijving: 'wild zwijn, rode wijn, jeneverbessen, aardappelpuree, seizoensgroenten', allergenen: ['lactose'] },
-          { id: 8, naam: 'Pulled Pork Burger', prijs: 18.50,
-            beschrijving: 'langzaam gegaard varken, briochebrood, augurk, huisrode saus', allergenen: ['gluten', 'ei'] },
-          { id: 9, naam: 'Gegrild Varkensfricandeau', prijs: 19.95,
-            beschrijving: 'fricandeau, mosterd-kruidenkorst, seizoensgroenten, rösti', allergenen: ['mosterd'] },
-          { id: 10, naam: 'Varkenshaas Medaillon', prijs: 26.50,
-            beschrijving: 'medaillon, champignonsaus, groene asperges, aardappelgratin', allergenen: ['lactose', 'gluten'] },
-        ]
-      },
-      nagerechten: {
-        icon: '🍮', label: 'Nagerechten',
-        items: [
-          { id: 11, naam: 'Crème Brûlée met Spekkaramel', prijs: 7.50,
-            beschrijving: 'vanilleroom, krokant suikerlaagje, spekkaramel', allergenen: ['ei', 'lactose'] },
-          { id: 12, naam: 'Appelflap met Kaneel IJs', prijs: 6.95,
-            beschrijving: 'bladerdeegspeek, appelvulling, kaneelijs, karamel', allergenen: ['gluten', 'lactose', 'ei'] },
-          { id: 13, naam: 'Chocolade Lava Cake', prijs: 8.25,
-            beschrijving: 'pure chocolade, vloeibare kern, vanilleijs, frambozen', allergenen: ['gluten', 'ei', 'lactose'], vegetarisch: true },
-          { id: 14, naam: 'Seizoensfruit met Sabayon', prijs: 6.50,
-            beschrijving: 'vers seizoensfruit, warme sabayonsaus, munt', allergenen: ['ei'], vegetarisch: true },
-          { id: 15, naam: 'Kaasplankje', prijs: 11.50,
-            beschrijving: 'selectie van 4 kazen, druiven, vijgenjam, noten, crackers', allergenen: ['lactose', 'gluten', 'noten'], vegetarisch: true },
-        ]
-      },
-      dranken: {
-        icon: '🥂', label: 'Dranken',
-        items: [
-          { id: 16, naam: 'Huiswijn Rood (glas)', prijs: 4.50,
-            beschrijving: 'Spaanse tempranillo, vol en fruitig', allergenen: ['sulfieten'] },
-          { id: 17, naam: 'Huiswijn Wit (glas)', prijs: 4.50,
-            beschrijving: 'Franse sauvignon blanc, fris en droog', allergenen: ['sulfieten'] },
-          { id: 18, naam: 'Craft Bier Vlammend (33cl)', prijs: 4.25,
-            beschrijving: 'huisbrouwerij amber ale, licht rokerig', allergenen: ['gluten'] },
-          { id: 19, naam: 'Frisdrank', prijs: 2.75,
-            beschrijving: 'cola, fanta, sprite, ice tea — naar keuze', allergenen: [], vegetarisch: true },
-          { id: 20, naam: 'Spa Rood / Blauw', prijs: 2.50,
-            beschrijving: 'bruisend of stil mineraalwater', allergenen: [], vegetarisch: true },
-          { id: 21, naam: 'Koffie of Thee', prijs: 2.95,
-            beschrijving: 'espresso, cappuccino, latte, of selectie thee', allergenen: ['lactose'], vegetarisch: true },
-        ]
-      }
+    // ── STATE ──────────────────────────────────────────────────────
+    let cart = {}, tafelNummer = '?', currentLang = 'nl';
+
+    // ── LANGUAGE FLAGS & LABELS ────────────────────────────────────
+    const langMeta = {
+      nl:{flag:'🇳🇱',label:'NL'}, en:{flag:'🇬🇧',label:'EN'},
+      de:{flag:'🇩🇪',label:'DE'}, fr:{flag:'🇫🇷',label:'FR'},
+      es:{flag:'🇪🇸',label:'ES'}, it:{flag:'🇮🇹',label:'IT'},
     };
 
-    // ─── STATE ───────────────────────────────────────────────────
-    let cart = {};
-    let tafelNummer = '?';
+    // ── UI TRANSLATIONS ────────────────────────────────────────────
+    const ui = {
+      nl:{tafel:'Tafel',cartBtn:'Bestelling',heroWelkom:'Welkom bij',heroSub:'Bekijk het menu, voeg toe en bestel direct vanaf tafel.',tag1:'🐷 Vlees specialist',tag2:'🔥 Verse grill',tag3:'📱 Bestel zelf',tabVoor:'🥗 Voorgerechten',tabHoofd:'🍖 Hoofdgerechten',tabNa:'🍮 Nagerechten',tabDrank:'🥂 Dranken',cat_voorgerechten:'Voorgerechten',cat_hoofdgerechten:'Hoofdgerechten',cat_nagerechten:'Nagerechten',cat_dranken:'Dranken',items:'gerechten',addBtn:'+ Voeg toe',veg:'🌿 Vegetarisch',cartTitle:'🛒 Jouw bestelling',totaal:'Totaal',bestelBtn:'🍽️ Bestelling plaatsen',cartEmpty:'Nog geen gerechten toegevoegd.',confirmTitle:'Bestelling plaatsen?',confirmSub:'Jouw bestelling wordt direct doorgezonden naar de keuken.',cancel:'Annuleer',confirm:'Ja, bestel!',succesTitle:'Bestelling',succesDone:'geplaatst!',succesText:'De keuken is aan de slag gegaan. Even geduld — het lekkers komt eraan!',succesTafel:'Jouw tafel',succesBack:'📋 Nieuw bestellen',toast:'✓ Toegevoegd aan bestelling'},
+      en:{tafel:'Table',cartBtn:'Order',heroWelkom:'Welcome to',heroSub:'Browse the menu, add dishes and order directly from your table.',tag1:'🐷 Meat specialist',tag2:'🔥 Fresh grill',tag3:'📱 Order yourself',tabVoor:'🥗 Starters',tabHoofd:'🍖 Main courses',tabNa:'🍮 Desserts',tabDrank:'🥂 Drinks',cat_voorgerechten:'Starters',cat_hoofdgerechten:'Main courses',cat_nagerechten:'Desserts',cat_dranken:'Drinks',items:'dishes',addBtn:'+ Add',veg:'🌿 Vegetarian',cartTitle:'🛒 Your order',totaal:'Total',bestelBtn:'🍽️ Place order',cartEmpty:'No dishes added yet.',confirmTitle:'Place order?',confirmSub:'Your order will be sent directly to the kitchen.',cancel:'Cancel',confirm:'Yes, order!',succesTitle:'Order',succesDone:'placed!',succesText:'The kitchen has started on your order. Hang tight — deliciousness is on its way!',succesTafel:'Your table',succesBack:'📋 Order again',toast:'✓ Added to your order'},
+      de:{tafel:'Tisch',cartBtn:'Bestellung',heroWelkom:'Willkommen bei',heroSub:'Speisekarte ansehen, Gerichte hinzufügen und direkt am Tisch bestellen.',tag1:'🐷 Fleischspezialist',tag2:'🔥 Frischer Grill',tag3:'📱 Selbst bestellen',tabVoor:'🥗 Vorspeisen',tabHoofd:'🍖 Hauptgerichte',tabNa:'🍮 Nachspeisen',tabDrank:'🥂 Getränke',cat_voorgerechten:'Vorspeisen',cat_hoofdgerechten:'Hauptgerichte',cat_nagerechten:'Nachspeisen',cat_dranken:'Getränke',items:'Gerichte',addBtn:'+ Hinzufügen',veg:'🌿 Vegetarisch',cartTitle:'🛒 Ihre Bestellung',totaal:'Gesamt',bestelBtn:'🍽️ Bestellung aufgeben',cartEmpty:'Noch keine Gerichte hinzugefügt.',confirmTitle:'Bestellung aufgeben?',confirmSub:'Ihre Bestellung wird direkt an die Küche weitergeleitet.',cancel:'Abbrechen',confirm:'Ja, bestellen!',succesTitle:'Bestellung',succesDone:'aufgegeben!',succesText:'Die Küche hat mit Ihrer Bestellung begonnen. Bitte haben Sie etwas Geduld!',succesTafel:'Ihr Tisch',succesBack:'📋 Neu bestellen',toast:'✓ Zur Bestellung hinzugefügt'},
+      fr:{tafel:'Table',cartBtn:'Commande',heroWelkom:'Bienvenue chez',heroSub:'Parcourez le menu, ajoutez des plats et commandez depuis votre table.',tag1:'🐷 Spécialiste viande',tag2:'🔥 Grill frais',tag3:'📱 Commandez vous-même',tabVoor:'🥗 Entrées',tabHoofd:'🍖 Plats principaux',tabNa:'🍮 Desserts',tabDrank:'🥂 Boissons',cat_voorgerechten:'Entrées',cat_hoofdgerechten:'Plats principaux',cat_nagerechten:'Desserts',cat_dranken:'Boissons',items:'plats',addBtn:'+ Ajouter',veg:'🌿 Végétarien',cartTitle:'🛒 Votre commande',totaal:'Total',bestelBtn:'🍽️ Passer la commande',cartEmpty:'Aucun plat ajouté pour le moment.',confirmTitle:'Passer la commande ?',confirmSub:'Votre commande sera envoyée directement en cuisine.',cancel:'Annuler',confirm:'Oui, commander !',succesTitle:'Commande',succesDone:'passée !',succesText:'La cuisine a commencé à préparer votre commande. Patientez un moment !',succesTafel:'Votre table',succesBack:'📋 Nouvelle commande',toast:'✓ Ajouté à votre commande'},
+      es:{tafel:'Mesa',cartBtn:'Pedido',heroWelkom:'Bienvenido a',heroSub:'Explora el menú, añade platos y pide directamente desde tu mesa.',tag1:'🐷 Especialista en carne',tag2:'🔥 Parrilla fresca',tag3:'📱 Pide tú mismo',tabVoor:'🥗 Entrantes',tabHoofd:'🍖 Platos principales',tabNa:'🍮 Postres',tabDrank:'🥂 Bebidas',cat_voorgerechten:'Entrantes',cat_hoofdgerechten:'Platos principales',cat_nagerechten:'Postres',cat_dranken:'Bebidas',items:'platos',addBtn:'+ Añadir',veg:'🌿 Vegetariano',cartTitle:'🛒 Tu pedido',totaal:'Total',bestelBtn:'🍽️ Realizar pedido',cartEmpty:'Aún no has añadido ningún plato.',confirmTitle:'¿Realizar pedido?',confirmSub:'Tu pedido se enviará directamente a la cocina.',cancel:'Cancelar',confirm:'¡Sí, pedir!',succesTitle:'Pedido',succesDone:'¡realizado!',succesText:'La cocina ha empezado a preparar tu pedido. ¡Ten un poco de paciencia!',succesTafel:'Tu mesa',succesBack:'📋 Nuevo pedido',toast:'✓ Añadido a tu pedido'},
+      it:{tafel:'Tavolo',cartBtn:'Ordine',heroWelkom:'Benvenuto da',heroSub:'Sfoglia il menu, aggiungi piatti e ordina direttamente dal tuo tavolo.',tag1:'🐷 Specialista in carne',tag2:'🔥 Griglia fresca',tag3:'📱 Ordina da solo',tabVoor:'🥗 Antipasti',tabHoofd:'🍖 Secondi piatti',tabNa:'🍮 Dolci',tabDrank:'🥂 Bevande',cat_voorgerechten:'Antipasti',cat_hoofdgerechten:'Secondi piatti',cat_nagerechten:'Dolci',cat_dranken:'Bevande',items:'piatti',addBtn:'+ Aggiungi',veg:'🌿 Vegetariano',cartTitle:'🛒 Il tuo ordine',totaal:'Totale',bestelBtn:'🍽️ Effettua ordine',cartEmpty:'Nessun piatto aggiunto ancora.',confirmTitle:"Effettuare l'ordine?",confirmSub:'Il tuo ordine sarà inviato direttamente in cucina.',cancel:'Annulla',confirm:'Sì, ordina!',succesTitle:'Ordine',succesDone:'effettuato!',succesText:"La cucina ha iniziato a preparare il tuo ordine. Abbi un po' di pazienza!",succesTafel:'Il tuo tavolo',succesBack:'📋 Nuovo ordine',toast:'✓ Aggiunto al tuo ordine'},
+    };
 
-    // ─── INIT ────────────────────────────────────────────────────
-    function init() {
-      const params = new URLSearchParams(window.location.search);
-      tafelNummer = params.get('tafel') || Math.floor(Math.random() * 10 + 1);
-      document.getElementById('tafel-label').textContent = `Tafel ${tafelNummer}`;
-      document.getElementById('modal-tafel-text').textContent = `Tafel ${tafelNummer}`;
-      document.getElementById('succes-tafel-num').textContent = tafelNummer;
+    // ── MENU DATA (multilingual) ───────────────────────────────────
+    const menuData = {
+      voorgerechten:[
+        {id:'v1',prijs:9.50,vegetarisch:false,
+          naam:{nl:'Paté van Varkenslever met Uienconfijt',en:'Pork Liver Pâté with Onion Confit',de:'Schweineleberpastete mit Zwiebelkonfüre',fr:'Pâté de foie de porc avec confit d\'oignon',es:'Paté de hígado de cerdo con cebolla confitada',it:'Paté di fegato di maiale con confettura di cipolle'},
+          desc:{nl:'varkenslever, rode ui, tijm, cognac, boerenbrood',en:'pork liver, red onion, thyme, cognac, farmhouse bread',de:'Schweineleber, rote Zwiebel, Thymian, Kognak, Landbrot',fr:'foie de porc, oignon rouge, thym, cognac, pain de campagne',es:'hígado de cerdo, cebolla roja, tomillo, coñac, pan rústico',it:'fegato di maiale, cipolla rossa, timo, cognac, pane rustico'},
+          allergenen:{nl:['gluten'],en:['gluten'],de:['Gluten'],fr:['gluten'],es:['gluten'],it:['glutine']}},
+        {id:'v2',prijs:7.95,vegetarisch:false,
+          naam:{nl:'Heldere Bouillon van Mergpijp',en:'Clear Marrowbone Broth',de:'Klare Markknochenbrühe',fr:'Bouillon clair de moelle osseuse',es:'Caldo claro de tuétano',it:'Brodo chiaro di osso midollare'},
+          desc:{nl:'mergpijp, winterpeen, knolselderij, peterselie',en:'marrowbone, winter carrot, celeriac, parsley',de:'Markknochen, Winterkarotte, Knollensellerie, Petersilie',fr:'os à moelle, carotte d\'hiver, céleri-rave, persil',es:'tuétano, zanahoria de invierno, apio nabo, perejil',it:'osso midollare, carota invernale, sedano rapa, prezzemolo'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'v3',prijs:8.50,vegetarisch:true,
+          naam:{nl:'Carpaccio van Bietenrood',en:'Red Beetroot Carpaccio',de:'Rote-Bete-Carpaccio',fr:'Carpaccio de betterave rouge',es:'Carpaccio de remolacha roja',it:'Carpaccio di barbabietola rossa'},
+          desc:{nl:'rode biet, geitenkaas, walnoot, rucola, balsamico',en:'red beet, goat cheese, walnut, rocket, balsamic',de:'rote Bete, Ziegenkäse, Walnuss, Rucola, Balsamico',fr:'betterave rouge, fromage de chèvre, noix, roquette, balsamique',es:'remolacha roja, queso de cabra, nuez, rúcula, balsámico',it:'barbabietola rossa, caprino, noce, rucola, aceto balsamico'},
+          allergenen:{nl:['noten','lactose'],en:['nuts','lactose'],de:['Nüsse','Laktose'],fr:['noix','lactose'],es:['frutos secos','lactosa'],it:['noci','lattosio']}},
+        {id:'v4',prijs:11.50,vegetarisch:false,
+          naam:{nl:'Tartaar van Eigen Slacht',en:'House-butchered Steak Tartare',de:'Tatar vom eigenen Schlachtbetrieb',fr:'Tartare de notre propre boucherie',es:'Tartar de nuestra propia carnicería',it:'Tartare della nostra macelleria'},
+          desc:{nl:'runderhaas, mosterd, kappertjes, augurk, eidooier',en:'beef tenderloin, mustard, capers, gherkin, egg yolk',de:'Rinderfilet, Senf, Kapern, Gewürzgurke, Eigelb',fr:'filet de bœuf, moutarde, câpres, cornichon, jaune d\'œuf',es:'solomillo de ternera, mostaza, alcaparras, pepinillo, yema de huevo',it:'filetto di manzo, senape, capperi, cetriolino, tuorlo d\'uovo'},
+          allergenen:{nl:['mosterd','ei'],en:['mustard','egg'],de:['Senf','Ei'],fr:['moutarde','œuf'],es:['mostaza','huevo'],it:['senape','uovo']}},
+        {id:'v5',prijs:10.25,vegetarisch:false,
+          naam:{nl:'Gerookte Forel uit Eigen Rokerij',en:'Home-smoked Trout',de:'Hausgeräucherte Forelle',fr:'Truite fumée maison',es:'Trucha ahumada artesanal',it:'Trota affumicata artigianalmente'},
+          desc:{nl:'gerookte forel, mierikswortelroom, kappertjes, roggebrood',en:'smoked trout, horseradish cream, capers, rye bread',de:'geräucherte Forelle, Meerrettichcreme, Kapern, Roggenbrot',fr:'truite fumée, crème de raifort, câpres, pain de seigle',es:'trucha ahumada, crema de rábano picante, alcaparras, pan de centeno',it:'trota affumicata, crema di rafano, capperi, pane di segale'},
+          allergenen:{nl:['vis','gluten','lactose'],en:['fish','gluten','lactose'],de:['Fisch','Gluten','Laktose'],fr:['poisson','gluten','lactose'],es:['pescado','gluten','lactosa'],it:['pesce','glutine','lattosio']}},
+      ],
+      hoofdgerechten:[
+        {id:'h1',prijs:24.50,vegetarisch:false,
+          naam:{nl:'Gevulde Varkenshaas',en:'Stuffed Pork Tenderloin',de:'Gefülltes Schweinefilet',fr:'Filet de porc farci',es:'Solomillo de cerdo relleno',it:'Filetto di maiale farcito'},
+          desc:{nl:'varkenshaas, paddenstoel-vulling, tijmsaus, seizoensgroenten',en:'pork tenderloin, mushroom stuffing, thyme sauce, seasonal vegetables',de:'Schweinefilet, Pilzfüllung, Thymiansauce, Saisongemüse',fr:'filet de porc, farce aux champignons, sauce au thym, légumes de saison',es:'solomillo de cerdo, relleno de setas, salsa de tomillo, verduras de temporada',it:'filetto di maiale, ripieno di funghi, salsa al timo, verdure di stagione'},
+          allergenen:{nl:['lactose'],en:['lactose'],de:['Laktose'],fr:['lactose'],es:['lactosa'],it:['lattosio']}},
+        {id:'h2',prijs:22.95,vegetarisch:false,
+          naam:{nl:'Spareribs Vlammend',en:'Flaming Spareribs',de:'Flammende Spareribs',fr:'Spareribs flamboyants',es:'Costillas flambeadas',it:'Spareribs fiammeggianti'},
+          desc:{nl:'varkensribbetjes, huisgemaakt BBQ-glazuur, coleslaw, friet',en:'pork ribs, house BBQ glaze, coleslaw, fries',de:'Schweinerippchen, hausgemachte BBQ-Glasur, Coleslaw, Pommes',fr:'côtes de porc, glaçage BBQ maison, coleslaw, frites',es:'costillas de cerdo, glaseado BBQ casero, ensalada de col, patatas fritas',it:'costine di maiale, glassa BBQ artigianale, coleslaw, patatine'},
+          allergenen:{nl:['gluten'],en:['gluten'],de:['Gluten'],fr:['gluten'],es:['gluten'],it:['glutine']}},
+        {id:'h3',prijs:21.50,vegetarisch:false,
+          naam:{nl:'Buikspek uit de Oven',en:'Oven-roasted Pork Belly',de:'Ofengebratener Schweinebauch',fr:'Poitrine de porc rôtie au four',es:'Panceta de cerdo al horno',it:'Pancetta di maiale al forno'},
+          desc:{nl:'buikspek, krokante zwoerd, appelcompote, aardappelgratin',en:'pork belly, crispy crackling, apple compote, potato gratin',de:'Schweinebauch, knusprige Schwarte, Apfelkompott, Kartoffelgratin',fr:'poitrine de porc, couenne croustillante, compote de pommes, gratin dauphinois',es:'panceta de cerdo, corteza crujiente, compota de manzana, gratín de patatas',it:'pancetta di maiale, cotenna croccante, composta di mele, gratin di patate'},
+          allergenen:{nl:['lactose','gluten'],en:['lactose','gluten'],de:['Laktose','Gluten'],fr:['lactose','gluten'],es:['lactosa','gluten'],it:['lattosio','glutine']}},
+        {id:'h4',prijs:26.95,vegetarisch:false,
+          naam:{nl:'Wild Zwijn Stoofpot',en:'Wild Boar Stew',de:'Wildschwein-Eintopf',fr:'Ragoût de sanglier',es:'Estofado de jabalí',it:'Stufato di cinghiale'},
+          desc:{nl:'wild zwijn, rode wijn, jeneverbessen, aardappelpuree, seizoensgroenten',en:'wild boar, red wine, juniper berries, mashed potato, seasonal vegetables',de:'Wildschwein, Rotwein, Wacholderbeeren, Kartoffelpüree, Saisongemüse',fr:'sanglier, vin rouge, baies de genièvre, purée de pommes de terre, légumes de saison',es:'jabalí, vino tinto, enebro, puré de patatas, verduras de temporada',it:'cinghiale, vino rosso, bacche di ginepro, purè di patate, verdure di stagione'},
+          allergenen:{nl:['lactose','sulfieten'],en:['lactose','sulphites'],de:['Laktose','Sulfite'],fr:['lactose','sulfites'],es:['lactosa','sulfitos'],it:['lattosio','solfiti']}},
+        {id:'h5',prijs:23.50,vegetarisch:false,
+          naam:{nl:'Mergpijp Risotto met Knolselderij',en:'Marrowbone Risotto with Celeriac',de:'Markknochen-Risotto mit Knollensellerie',fr:'Risotto à la moelle et céleri-rave',es:'Risotto de tuétano con apio nabo',it:'Risotto con osso midollare e sedano rapa'},
+          desc:{nl:'arborio rijst, mergpijp, knolselderij, Parmezaan, truffelolie',en:'arborio rice, marrowbone, celeriac, Parmesan, truffle oil',de:'Arborio-Reis, Markknochen, Knollensellerie, Parmesan, Trüffelöl',fr:'riz arborio, os à moelle, céleri-rave, parmesan, huile de truffe',es:'arroz arborio, tuétano, apio nabo, parmesano, aceite de trufa',it:'riso arborio, osso midollare, sedano rapa, parmigiano, olio al tartufo'},
+          allergenen:{nl:['lactose','gluten'],en:['lactose','gluten'],de:['Laktose','Gluten'],fr:['lactose','gluten'],es:['lactosa','gluten'],it:['lattosio','glutine']}},
+      ],
+      nagerechten:[
+        {id:'n1',prijs:7.50,vegetarisch:true,
+          naam:{nl:'Stoofpeertjes met Boerentijm',en:'Stewed Pears with Farm Thyme',de:'Schmorrbirnen mit Bauerntymian',fr:'Poires pochées au thym fermier',es:'Peras estofadas con tomillo rural',it:'Pere stufate con timo rustico'},
+          desc:{nl:'stoofpeertje, rode wijn, kaneel, vanilleijs, walnoot',en:'stewing pear, red wine, cinnamon, vanilla ice cream, walnut',de:'Schmorbirne, Rotwein, Zimt, Vanilleeis, Walnuss',fr:'poire à cuire, vin rouge, cannelle, glace vanille, noix',es:'pera de cocción, vino tinto, canela, helado de vainilla, nuez',it:'pera da cuocere, vino rosso, cannella, gelato alla vaniglia, noce'},
+          allergenen:{nl:['lactose','noten'],en:['lactose','nuts'],de:['Laktose','Nüsse'],fr:['lactose','noix'],es:['lactosa','frutos secos'],it:['lattosio','noci']}},
+        {id:'n2',prijs:6.95,vegetarisch:true,
+          naam:{nl:'Karnemelk Panna Cotta',en:'Buttermilk Panna Cotta',de:'Buttermilch-Panna Cotta',fr:'Panna cotta au babeurre',es:'Panna cotta de suero de leche',it:'Panna cotta al latticello'},
+          desc:{nl:'karnemelk, vanille, aardbeiencompote, verse munt',en:'buttermilk, vanilla, strawberry compote, fresh mint',de:'Buttermilch, Vanille, Erdbeerkompost, frische Minze',fr:'babeurre, vanille, compote de fraises, menthe fraîche',es:'suero de leche, vainilla, compota de fresas, menta fresca',it:'latticello, vaniglia, composta di fragole, menta fresca'},
+          allergenen:{nl:['lactose','ei'],en:['lactose','egg'],de:['Laktose','Ei'],fr:['lactose','œuf'],es:['lactosa','huevo'],it:['lattosio','uovo']}},
+        {id:'n3',prijs:7.95,vegetarisch:true,
+          naam:{nl:'Appel-Walnoot Crumble',en:'Apple-Walnut Crumble',de:'Apfel-Walnuss-Crumble',fr:'Crumble pomme-noix',es:'Crumble de manzana y nuez',it:'Crumble mela e noci'},
+          desc:{nl:'appel, walnoot, kaneel, crumble, slagroom',en:'apple, walnut, cinnamon, crumble, whipped cream',de:'Apfel, Walnuss, Zimt, Streusel, Schlagsahne',fr:'pomme, noix, cannelle, crumble, crème fouettée',es:'manzana, nuez, canela, crumble, nata montada',it:'mela, noce, cannella, crumble, panna montata'},
+          allergenen:{nl:['gluten','noten','lactose'],en:['gluten','nuts','lactose'],de:['Gluten','Nüsse','Laktose'],fr:['gluten','noix','lactose'],es:['gluten','frutos secos','lactosa'],it:['glutine','noci','lattosio']}},
+        {id:'n4',prijs:6.50,vegetarisch:true,
+          naam:{nl:'Vlierbessen Sorbet',en:'Elderberry Sorbet',de:'Holunderbeeren-Sorbet',fr:'Sorbet aux baies de sureau',es:'Sorbete de saúco',it:'Sorbetto al sambuco'},
+          desc:{nl:'vlierbessen, citroen, munt, amandelkoekje',en:'elderberries, lemon, mint, almond biscuit',de:'Holunderbeeren, Zitrone, Minze, Mandelkeks',fr:'baies de sureau, citron, menthe, biscuit aux amandes',es:'bayas de saúco, limón, menta, galleta de almendra',it:'bacche di sambuco, limone, menta, biscotto alle mandorle'},
+          allergenen:{nl:['noten','gluten'],en:['nuts','gluten'],de:['Nüsse','Gluten'],fr:['noix','gluten'],es:['frutos secos','gluten'],it:['noci','glutine']}},
+        {id:'n5',prijs:7.25,vegetarisch:true,
+          naam:{nl:'Speculaas Parfait',en:'Speculoos Parfait',de:'Spekulatius-Parfait',fr:'Parfait spéculoos',es:'Parfait de speculoos',it:'Parfait di speculoos'},
+          desc:{nl:'speculaas, mascarpone, karamel, appel-peer compote',en:'speculoos, mascarpone, caramel, apple-pear compote',de:'Spekulatius, Mascarpone, Karamell, Apfel-Birnen-Kompott',fr:'spéculoos, mascarpone, caramel, compote pomme-poire',es:'speculoos, mascarpone, caramelo, compota de manzana y pera',it:'speculoos, mascarpone, caramello, composta mela e pera'},
+          allergenen:{nl:['gluten','lactose','ei'],en:['gluten','lactose','egg'],de:['Gluten','Laktose','Ei'],fr:['gluten','lactose','œuf'],es:['gluten','lactosa','huevo'],it:['glutine','lattosio','uovo']}},
+      ],
+      dranken:[
+        {id:'d1',prijs:4.50,vegetarisch:true,
+          naam:{nl:'Huiswijn Rood (glas)',en:'House Red Wine (glass)',de:'Hauswein Rot (Glas)',fr:'Vin rouge maison (verre)',es:'Vino tinto de la casa (copa)',it:'Vino rosso della casa (bicchiere)'},
+          desc:{nl:'Spaanse tempranillo, vol en fruitig',en:'Spanish tempranillo, full-bodied and fruity',de:'Spanischer Tempranillo, vollmundig und fruchtig',fr:'Tempranillo espagnol, corsé et fruité',es:'Tempranillo español, cuerpo completo y afrutado',it:'Tempranillo spagnolo, corposo e fruttato'},
+          allergenen:{nl:['sulfieten'],en:['sulphites'],de:['Sulfite'],fr:['sulfites'],es:['sulfitos'],it:['solfiti']}},
+        {id:'d2',prijs:4.50,vegetarisch:true,
+          naam:{nl:'Huiswijn Wit (glas)',en:'House White Wine (glass)',de:'Hauswein Weiß (Glas)',fr:'Vin blanc maison (verre)',es:'Vino blanco de la casa (copa)',it:'Vino bianco della casa (bicchiere)'},
+          desc:{nl:'Franse sauvignon blanc, fris en droog',en:'French sauvignon blanc, fresh and dry',de:'Französischer Sauvignon Blanc, frisch und trocken',fr:'Sauvignon blanc français, frais et sec',es:'Sauvignon blanc francés, fresco y seco',it:'Sauvignon blanc francese, fresco e secco'},
+          allergenen:{nl:['sulfieten'],en:['sulphites'],de:['Sulfite'],fr:['sulfites'],es:['sulfitos'],it:['solfiti']}},
+        {id:'d3',prijs:5.50,vegetarisch:true,
+          naam:{nl:'Streek Tripel (33cl)',en:'Regional Triple Ale (33cl)',de:'Regionales Tripel (33cl)',fr:'Triple régionale (33cl)',es:'Triple regional (33cl)',it:'Tripla regionale (33cl)'},
+          desc:{nl:'lokaal gebrouwen tripel, 8.5%, bloemig en krachtig',en:'locally brewed triple, 8.5%, floral and strong',de:'lokal gebrautes Tripel, 8,5%, blumig und kräftig',fr:'triple brassée localement, 8,5%, florale et forte',es:'triple elaborada localmente, 8,5%, floral y potente',it:'tripla prodotta localmente, 8,5%, floreale e robusta'},
+          allergenen:{nl:['gluten'],en:['gluten'],de:['Gluten'],fr:['gluten'],es:['gluten'],it:['glutine']}},
+        {id:'d4',prijs:4.25,vegetarisch:true,
+          naam:{nl:'Craft Bier Vlammend (33cl)',en:'Vlammend Craft Beer (33cl)',de:'Craft Bier Vlammend (33cl)',fr:'Bière artisanale Vlammend (33cl)',es:'Cerveza artesana Vlammend (33cl)',it:'Birra artigianale Vlammend (33cl)'},
+          desc:{nl:'huisbrouwerij amber ale, licht rokerig',en:'house brewery amber ale, lightly smoky',de:'Hausbrauerei Amber Ale, leicht rauchig',fr:'amber ale de notre brasserie, légèrement fumée',es:'amber ale de nuestra cervecería, ligeramente ahumada',it:'amber ale del nostro birrificio, leggermente affumicata'},
+          allergenen:{nl:['gluten'],en:['gluten'],de:['Gluten'],fr:['gluten'],es:['gluten'],it:['glutine']}},
+        {id:'d5',prijs:4.75,vegetarisch:true,
+          naam:{nl:'Kruidenbitter (4cl)',en:'Herbal Bitters (4cl)',de:'Kräuterbitter (4cl)',fr:'Amers aux herbes (4cl)',es:'Amargo de hierbas (4cl)',it:'Amaro alle erbe (4cl)'},
+          desc:{nl:'huisgemaakt kruidenbitter, 25 kruiden en specerijen',en:'homemade herbal bitters, 25 herbs and spices',de:'hausgemachter Kräuterbitter, 25 Kräuter und Gewürze',fr:'amers aux herbes maison, 25 herbes et épices',es:'amargo de hierbas casero, 25 hierbas y especias',it:'amaro artigianale, 25 erbe e spezie'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'d6',prijs:4.50,vegetarisch:true,
+          naam:{nl:'Cider Huismerk (33cl)',en:'House Cider (33cl)',de:'Hausmarke Cider (33cl)',fr:'Cidre maison (33cl)',es:'Sidra de la casa (33cl)',it:'Sidro della casa (33cl)'},
+          desc:{nl:'halfdroge appel cider, fris en licht bruisend',en:'semi-dry apple cider, fresh and lightly sparkling',de:'halbtrocken Apfelcider, frisch und leicht prickelnd',fr:'cidre de pomme demi-sec, frais et légèrement pétillant',es:'sidra de manzana semiseca, fresca y ligeramente espumosa',it:'sidro di mele semisecco, fresco e leggermente frizzante'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'d7',prijs:3.50,vegetarisch:true,
+          naam:{nl:'Vlierbloesem Limonade',en:'Elderflower Lemonade',de:'Holunderblüten-Limonade',fr:'Limonade à la fleur de sureau',es:'Limonada de flor de saúco',it:'Limonata ai fiori di sambuco'},
+          desc:{nl:'huisgemaakt, vlierbloesem, citroen, bruisend water',en:'homemade, elderflower, lemon, sparkling water',de:'hausgemacht, Holunderblüte, Zitrone, Sprudelwasser',fr:'fait maison, fleur de sureau, citron, eau pétillante',es:'casera, flor de saúco, limón, agua con gas',it:'artigianale, fiori di sambuco, limone, acqua frizzante'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'d8',prijs:2.75,vegetarisch:true,
+          naam:{nl:'Frisdrank',en:'Soft Drink',de:'Erfrischungsgetränk',fr:'Boisson gazeuse',es:'Refresco',it:'Bibita'},
+          desc:{nl:'cola, fanta, sprite, ice tea — naar keuze',en:'cola, fanta, sprite, ice tea — your choice',de:'Cola, Fanta, Sprite, Eistee — nach Wahl',fr:'cola, fanta, sprite, ice tea — au choix',es:'cola, fanta, sprite, ice tea — a elegir',it:'cola, fanta, sprite, ice tea — a scelta'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'d9',prijs:2.50,vegetarisch:true,
+          naam:{nl:'Spa Rood / Blauw',en:'Sparkling / Still Water',de:'Sprudelwasser / Stilles Wasser',fr:'Eau pétillante / plate',es:'Agua con gas / sin gas',it:'Acqua frizzante / naturale'},
+          desc:{nl:'bruisend of stil mineraalwater',en:'sparkling or still mineral water',de:'Sprudel- oder stilles Mineralwasser',fr:'eau minérale pétillante ou plate',es:'agua mineral con o sin gas',it:'acqua minerale frizzante o naturale'},
+          allergenen:{nl:[],en:[],de:[],fr:[],es:[],it:[]}},
+        {id:'d10',prijs:2.95,vegetarisch:true,
+          naam:{nl:'Koffie of Thee',en:'Coffee or Tea',de:'Kaffee oder Tee',fr:'Café ou thé',es:'Café o té',it:'Caffè o tè'},
+          desc:{nl:'espresso, cappuccino, latte of selectie thee',en:'espresso, cappuccino, latte or selection of teas',de:'Espresso, Cappuccino, Latte oder Teeauswahl',fr:'espresso, cappuccino, latte ou sélection de thés',es:'espresso, cappuccino, latte o selección de tés',it:'espresso, cappuccino, latte o selezione di tè'},
+          allergenen:{nl:['lactose'],en:['lactose'],de:['Laktose'],fr:['lactose'],es:['lactosa'],it:['lattosio']}},
+      ],
+    };
+
+    // ── INIT CALL ──────────────────────────────────────────────────
+    init();
+
+    // ── SECTION KEY MAP ────────────────────────────────────────────
+    const sectionKeys = ['voorgerechten','hoofdgerechten','nagerechten','dranken'];
+    const sectionIcons = {voorgerechten:'🥗',hoofdgerechten:'🍖',nagerechten:'🍮',dranken:'🥂'};
+
+    // ── LANGUAGE DROPDOWN ──────────────────────────────────────────
+    function toggleLangMenu(){document.getElementById('lang-wrap').classList.toggle('open');}
+    document.addEventListener('click',e=>{const w=document.getElementById('lang-wrap');if(!w.contains(e.target))w.classList.remove('open');});
+
+    function setLang(lang){
+      currentLang=lang;
+      const m=langMeta[lang];
+      document.getElementById('lang-current-flag').textContent=m.flag;
+      document.getElementById('lang-current-label').textContent=m.label;
+      document.querySelectorAll('.lang-option').forEach(o=>o.classList.remove('active'));
+      document.getElementById(`opt-${lang}`).classList.add('active');
+      document.getElementById('lang-wrap').classList.remove('open');
+      document.documentElement.lang=lang;
+      applyUITranslations();
       renderAllSections();
-      switchTab('voorgerechten', document.querySelector('.tab-btn'));
-    }
-
-    // ─── RENDER MENU ─────────────────────────────────────────────
-    function renderAllSections() {
-      const container = document.getElementById('menu-content');
-      container.innerHTML = '';
-      for (const [key, section] of Object.entries(menuData)) {
-        const sec = document.createElement('div');
-        sec.className = 'menu-section';
-        sec.id = `section-${key}`;
-        sec.innerHTML = `
-          <div class="section-header">
-            <span class="section-icon">${section.icon}</span>
-            <span class="section-title">${section.label}</span>
-            <span class="section-count">${section.items.length} gerechten</span>
-          </div>
-          <div class="menu-list">
-            ${section.items.map(item => renderCard(item)).join('')}
-          </div>`;
-        container.appendChild(sec);
-      }
-    }
-
-    function renderCard(item) {
-      const tags = item.allergenen.map(a => `<span class="allergen-tag">${a}</span>`).join('');
-      const vegBadge = item.vegetarisch ? `<span class="veg-badge">🌿 Vegetarisch</span>` : '';
-      return `
-        <div class="menu-card" id="card-${item.id}">
-          <div class="card-top">
-            <span class="card-name">${item.naam}</span>
-            <span class="card-price">€ ${item.prijs.toFixed(2).replace('.',',')}</span>
-          </div>
-          <div class="card-desc">${item.beschrijving}</div>
-          <div class="card-bottom">
-            <div class="allergens">${vegBadge}${tags}</div>
-            <button class="add-btn" onclick="addToCart(${item.id})">+ Voeg toe</button>
-          </div>
-        </div>`;
-    }
-
-    // ─── TABS ────────────────────────────────────────────────────
-    function switchTab(key, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-      const sec = document.getElementById(`section-${key}`);
-      if (sec) sec.classList.add('active');
-    }
-
-    // ─── CART LOGIC ──────────────────────────────────────────────
-    function findItem(id) {
-      for (const section of Object.values(menuData))
-        for (const item of section.items)
-          if (item.id === id) return item;
-    }
-
-    function addToCart(id) {
-      cart[id] = (cart[id] || 0) + 1;
-      updateCartUI();
-      showToast();
-    }
-
-    function changeQty(id, delta) {
-      cart[id] = (cart[id] || 0) + delta;
-      if (cart[id] <= 0) delete cart[id];
-      updateCartUI();
+      const activeSection=document.querySelector('.menu-section.active');
+      const key=activeSection?activeSection.id.replace('section-',''):'voorgerechten';
+      switchTab(key, document.getElementById(`tab-${key==='voorgerechten'?'voor':key==='hoofdgerechten'?'hoofd':key==='nagerechten'?'na':'drank'}`));
       renderCartItems();
     }
 
-    function updateCartUI() {
-      const total = Object.values(cart).reduce((a, b) => a + b, 0);
-      const badge = document.getElementById('cart-badge');
-      badge.textContent = total;
-      badge.style.display = total > 0 ? 'flex' : 'none';
+    function applyUITranslations(){
+      const tr=ui[currentLang];
+      document.getElementById('tafel-label').textContent=`${tr.tafel} ${tafelNummer}`;
+      document.getElementById('cart-btn-label').textContent=tr.cartBtn;
+      document.getElementById('hero-title').innerHTML=`${tr.heroWelkom}<br/><span>Vlammend Varken</span>`;
+      document.getElementById('hero-sub').textContent=tr.heroSub;
+      document.getElementById('hero-tag1').textContent=tr.tag1;
+      document.getElementById('hero-tag2').textContent=tr.tag2;
+      document.getElementById('hero-tag3').textContent=tr.tag3;
+      document.getElementById('tab-voor').textContent=tr.tabVoor;
+      document.getElementById('tab-hoofd').textContent=tr.tabHoofd;
+      document.getElementById('tab-na').textContent=tr.tabNa;
+      document.getElementById('tab-drank').textContent=tr.tabDrank;
+      document.getElementById('cart-title').textContent=tr.cartTitle;
+      document.getElementById('cart-totaal-label').textContent=tr.totaal;
+      document.getElementById('bestel-btn').textContent=tr.bestelBtn;
+      document.getElementById('modal-title').textContent=tr.confirmTitle;
+      document.getElementById('modal-sub').textContent=tr.confirmSub;
+      document.getElementById('modal-tafel').textContent=`${tr.tafel} ${tafelNummer}`;
+      document.getElementById('modal-cancel').textContent=tr.cancel;
+      document.getElementById('modal-confirm').textContent=tr.confirm;
+      document.getElementById('succes-title').innerHTML=`${tr.succesTitle} <span>${tr.succesDone}</span>`;
+      document.getElementById('succes-text').textContent=tr.succesText;
+      document.getElementById('succes-tafel-label').textContent=tr.succesTafel;
+      document.getElementById('succes-back').textContent=tr.succesBack;
+      document.getElementById('toast').textContent=tr.toast;
     }
 
-    function cartTotal() {
-      return Object.entries(cart).reduce((sum, [id, qty]) => {
-        const item = findItem(parseInt(id));
-        return sum + (item ? item.prijs * qty : 0);
-      }, 0);
+    // ── RENDER MENU ────────────────────────────────────────────────
+    function renderAllSections(){
+      const tr=ui[currentLang];
+      const container=document.getElementById('menu-content');
+      container.innerHTML='';
+      sectionKeys.forEach(key=>{
+        const section=menuData[key];
+        const sec=document.createElement('div');
+        sec.className='menu-section'; sec.id=`section-${key}`;
+        sec.innerHTML=`<div class="section-header"><span class="section-icon">${sectionIcons[key]}</span><span class="section-title">${tr['cat_'+key]}</span><span class="section-count">${section.length} ${tr.items}</span></div><div class="menu-list">${section.map(item=>renderCard(item)).join('')}</div>`;
+        container.appendChild(sec);
+      });
     }
 
-    function renderCartItems() {
-      const list = document.getElementById('cart-items-list');
-      const keys = Object.keys(cart);
-      if (keys.length === 0) {
-        list.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🍽️</div>Nog geen gerechten toegevoegd.</div>`;
-        document.getElementById('bestel-btn').disabled = true;
-        document.getElementById('cart-total').textContent = '€ 0,00';
+    function renderCard(item){
+      const tr=ui[currentLang]; const l=currentLang;
+      const tags=item.allergenen[l].map(a=>`<span class="allergen-tag">${a}</span>`).join('');
+      const veg=item.vegetarisch?`<span class="veg-badge">${tr.veg}</span>`:'';
+      return `<div class="menu-card"><div class="card-top"><span class="card-name">${item.naam[l]}</span><span class="card-price">€ ${item.prijs.toFixed(2).replace('.',',')}</span></div><div class="card-desc">${item.desc[l]}</div><div class="card-bottom"><div class="allergens">${veg}${tags}</div><button class="add-btn" onclick="addToCart('${item.id}')">${tr.addBtn}</button></div></div>`;
+    }
+
+    // ── TABS ───────────────────────────────────────────────────────
+    function switchTab(key,btn){
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
+      if(btn)btn.classList.add('active');
+      const sec=document.getElementById(`section-${key}`);
+      if(sec)sec.classList.add('active');
+    }
+
+    // ── CART ───────────────────────────────────────────────────────
+    function findItem(id){for(const k of sectionKeys)for(const it of menuData[k])if(it.id===id)return it;}
+    function addToCart(id){cart[id]=(cart[id]||0)+1;updateCartBadge();showToast();}
+    function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCartBadge();renderCartItems();}
+    function updateCartBadge(){const n=Object.values(cart).reduce((a,b)=>a+b,0);const b=document.getElementById('cart-badge');b.textContent=n;b.style.display=n>0?'flex':'none';}
+    function cartTotal(){return Object.entries(cart).reduce((s,[id,q])=>{const it=findItem(id);return s+(it?it.prijs*q:0);},0);}
+
+    function renderCartItems(){
+      const list=document.getElementById('cart-items-list');
+      const tr=ui[currentLang]; const l=currentLang;
+      const keys=Object.keys(cart);
+      if(keys.length===0){
+        list.innerHTML=`<div class="cart-empty"><div class="cart-empty-icon">🍽️</div>${tr.cartEmpty}</div>`;
+        document.getElementById('bestel-btn').disabled=true;
+        document.getElementById('cart-total').textContent='€ 0,00';
         return;
       }
-      document.getElementById('bestel-btn').disabled = false;
-      list.innerHTML = keys.map(id => {
-        const item = findItem(parseInt(id));
-        const qty = cart[id];
-        return `<div class="cart-item">
-          <div class="cart-item-info">
-            <div class="cart-item-name">${item.naam}</div>
-            <div class="cart-item-price">€ ${(item.prijs * qty).toFixed(2).replace('.',',')}  <span style="color:var(--text-muted);font-size:0.72rem;">(${qty} × € ${item.prijs.toFixed(2).replace('.',',')})</span></div>
-          </div>
-          <div class="qty-controls">
-            <button class="qty-btn minus" onclick="changeQty(${id}, -1)">−</button>
-            <span class="qty-num">${qty}</span>
-            <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
-          </div>
-        </div>`;
+      document.getElementById('bestel-btn').disabled=false;
+      list.innerHTML=keys.map(id=>{
+        const it=findItem(id);const q=cart[id];
+        return `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${it.naam[l]}</div><div class="cart-item-price">€ ${(it.prijs*q).toFixed(2).replace('.',',')} <span style="color:var(--text-muted);font-size:0.72rem;">(${q} × € ${it.prijs.toFixed(2).replace('.',',')})</span></div></div><div class="qty-controls"><button class="qty-btn minus" onclick="changeQty('${id}',-1)">−</button><span class="qty-num">${q}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button></div></div>`;
       }).join('');
-      document.getElementById('cart-total').textContent = `€ ${cartTotal().toFixed(2).replace('.',',')}`;
+      document.getElementById('cart-total').textContent=`€ ${cartTotal().toFixed(2).replace('.',',')}`;
     }
 
-    // ─── CART PANEL ──────────────────────────────────────────────
-    function openCart() {
-      renderCartItems();
-      document.getElementById('cart-overlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeCart() {
-      document.getElementById('cart-overlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function handleOverlayClick(e) {
-      if (e.target === document.getElementById('cart-overlay')) closeCart();
-    }
+    function openCart(){renderCartItems();document.getElementById('cart-overlay').classList.add('open');document.body.style.overflow='hidden';}
+    function closeCart(){document.getElementById('cart-overlay').classList.remove('open');document.body.style.overflow='';}
+    function handleOverlayClick(e){if(e.target===document.getElementById('cart-overlay'))closeCart();}
+    function openConfirm(){closeCart();document.getElementById('confirm-modal').classList.add('open');}
+    function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');}
+    function plaatsOrder(){closeConfirm();cart={};updateCartBadge();document.getElementById('succes-modal').classList.add('open');}
+    function nieuweBestelling(){document.getElementById('succes-modal').classList.remove('open');}
 
-    // ─── CONFIRM / ORDER ─────────────────────────────────────────
-    function openConfirm() {
-      closeCart();
-      document.getElementById('confirm-modal').classList.add('open');
-    }
-    function closeConfirm() {
-      document.getElementById('confirm-modal').classList.remove('open');
-    }
-    function plaatsOrder() {
-      closeConfirm();
-      // Hier later: fetch() naar backend / Firebase
-      console.log('ORDER GEPLAATST:', { tafel: tafelNummer, items: cart, totaal: cartTotal() });
-      cart = {};
-      updateCartUI();
-      document.getElementById('succes-modal').classList.add('open');
-    }
-    function nieuweBestelling() {
-      document.getElementById('succes-modal').classList.remove('open');
-    }
-
-    // ─── TOAST ───────────────────────────────────────────────────
     let toastTimer;
-    function showToast() {
-      const t = document.getElementById('toast');
-      t.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+    function showToast(){const t=document.getElementById('toast');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
+
+    // ── INIT ───────────────────────────────────────────────────────
+    function init(){
+      const p=new URLSearchParams(window.location.search);
+      tafelNummer=p.get('tafel')||Math.floor(Math.random()*10+1);
+      document.getElementById('succes-tafel-num').textContent=tafelNummer;
+      applyUITranslations();
+      renderAllSections();
+      switchTab('voorgerechten',document.getElementById('tab-voor'));
     }
 
-    init();
+    // Data filled by str_replace below, then init() called
   </script>
 </body>
 </html>

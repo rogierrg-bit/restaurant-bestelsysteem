@@ -30,6 +30,8 @@ namespace VlammendVarken
 
         private const string VegLeafSvg = "<svg viewBox=\"0 0 24 24\" width=\"13\" height=\"13\" fill=\"#639922\" style=\"vertical-align: -2px; margin-right: 4px;\"><path d=\"M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z\"/></svg>";
 
+        private const string FlameSvg = "<svg class=\"flame\" viewBox=\"0 0 24 24\" width=\"36\" height=\"36\" fill=\"#EA580C\" aria-hidden=\"true\"><path d=\"M12 2s4 4.5 4 8a4 4 0 1 1-8 0c0-1.5.6-2.8 1.2-3.7C9.9 7.6 10 8.4 10 9c.6-1.4 2-3.5 2-7zm-1.5 11c.3 1.2 1.4 2 2.5 2 1.7 0 3-1.3 3-3 0-.5-.1-.9-.3-1.3C16.5 12.2 17 13.8 17 15.5 17 18.5 14.5 21 11.5 21S6 18.5 6 15.5c0-2 1-3.7 2.5-4.8-.1.4-.2.9-.2 1.3 0 1.2.9 2.2 2.2 2z\"/></svg>";
+
         private static string LeesLogoAlsDataUri()
         {
             var pad = Path.Combine(AppContext.BaseDirectory, "logo.png");
@@ -74,33 +76,39 @@ namespace VlammendVarken
             sb.AppendLine("<head>");
             sb.AppendLine("  <meta charset=\"UTF-8\">");
             sb.AppendLine("  <title>Menukaart - Vlammend Varken</title>");
+            sb.AppendLine("  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">");
+            sb.AppendLine("  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>");
+            sb.AppendLine("  <link href=\"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;500;700&display=swap\" rel=\"stylesheet\">");
             sb.AppendLine("  <style>");
-            sb.AppendLine("    body { font-family: Georgia, 'Times New Roman', serif; max-width: 780px; margin: 2rem auto; padding: 0 1.5rem; color: #f0f0f0; background: #2b2b2b; }");
-            sb.AppendLine("    header { text-align: center; border-bottom: 2px solid #f5f0e8; padding-bottom: 1rem; margin-bottom: 2rem; }");
-            sb.AppendLine("    header h1 { font-size: 2.4rem; margin: 0; letter-spacing: 2px; color: #f5f0e8; }");
-            sb.AppendLine("    header p { font-style: italic; color: #cfcfcf; margin: 0.25rem 0 0; }");
-            sb.AppendLine("    section { margin-bottom: 2.5rem; margin-top: 3rem; }");
-            sb.AppendLine("    section h2 { font-size: 2rem; color: #f5f0e8; text-align: center; margin-top: 2.5rem; margin-bottom: 1.5rem; padding: 0; border: none; letter-spacing: 1px; }");
-            sb.AppendLine("    .item { margin-bottom: 1.2rem; }");
-            sb.AppendLine("    .item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; }");
-            sb.AppendLine("    .item-naam { color: #f0f0f0; }");
-            sb.AppendLine("    .item-prijs { color: #f5f0e8; }");
-            sb.AppendLine("    .ingredienten { font-style: italic; color: #8fac6e; margin: 0.2rem 0 0.1rem; }");
-            sb.AppendLine("    .allergenen { font-size: 0.8rem; color: #888888; }");
-            sb.AppendLine("    .alcohol { font-size: 0.85rem; color: #c9a87a; font-variant: small-caps; }");
-            sb.AppendLine("    .veg-icon { color: #6aaa3a; margin-right: 0.35rem; font-size: 1.05em; }");
-            sb.AppendLine("    header img.logo { display: block; margin: 0 auto 0.5rem; max-width: 120px; height: auto; }");
+            sb.AppendLine("    html, body { background: #FFFFFF; }");
+            sb.AppendLine("    body { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 16px; max-width: 700px; margin: 2rem auto; padding: 0 1.5rem; color: #3D1F0F; }");
+            sb.AppendLine("    header { text-align: center; border-bottom: 1px solid #FED7AA; padding-bottom: 1.25rem; margin-bottom: 2.25rem; }");
+            sb.AppendLine("    header .flame { display: block; margin: 0 auto 0.75rem; }");
+            sb.AppendLine("    header img.logo { display: block; margin: 0 auto 0.75rem; max-width: 140px; height: auto; }");
+            sb.AppendLine("    header h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; margin: 0; letter-spacing: 0.18em; color: #B91C1C; text-transform: uppercase; }");
+            sb.AppendLine("    header p { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: #78350F; margin: 0.4rem 0 0; }");
+            sb.AppendLine("    section { margin-bottom: 1.75rem; margin-top: 2.25rem; }");
+            sb.AppendLine("    section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 500; color: #EA580C; text-align: center; margin-top: 2rem; margin-bottom: 1.5rem; padding: 0; border: none; letter-spacing: 0.12em; text-transform: uppercase; }");
+            sb.AppendLine("    .item { margin-bottom: 1.25rem; }");
+            sb.AppendLine("    .item-header { display: flex; justify-content: space-between; align-items: baseline; font-size: 17px; }");
+            sb.AppendLine("    .item-naam { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; color: #3D1F0F; }");
+            sb.AppendLine("    .item-prijs { font-family: 'Cormorant Garamond', Georgia, serif; color: #EA580C; font-weight: 500; }");
+            sb.AppendLine("    .ingredienten { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 14px; color: #78350F; margin: 0.2rem 0 0.1rem; }");
+            sb.AppendLine("    .allergenen { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; color: #A8978A; }");
+            sb.AppendLine("    .alcohol { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; color: #B91C1C; font-variant: small-caps; letter-spacing: 0.05em; }");
+            sb.AppendLine("    .veg-icon { color: #639922; margin-right: 0.35rem; font-size: 1.05em; }");
             sb.AppendLine("    .dranken-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }");
-            sb.AppendLine("    .dranken-col-header { font-style: italic; color: #999999; margin-bottom: 0.8rem; font-size: 0.95rem; }");
+            sb.AppendLine("    .dranken-col-header { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: #B91C1C; margin-bottom: 0.8rem; font-size: 16px; }");
             sb.AppendLine("    .drank-item { margin-bottom: 1.2rem; }");
-            sb.AppendLine("    .drank-naam { font-weight: bold; color: #f0f0f0; font-size: 1.05rem; }");
-            sb.AppendLine("    .drank-prijs { text-align: right; color: #f5f0e8; font-weight: bold; margin-top: 0.2rem; }");
+            sb.AppendLine("    .drank-naam { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; color: #3D1F0F; font-size: 17px; }");
+            sb.AppendLine("    .drank-prijs { text-align: right; color: #EA580C; font-weight: 500; margin-top: 0.2rem; }");
             sb.AppendLine("    @media (max-width: 600px) { .dranken-grid { grid-template-columns: 1fr; } }");
-            sb.AppendLine("    footer { text-align: center; font-size: 0.8rem; color: #888888; margin-top: 3rem; border-top: 1px solid #4a4a4a; padding-top: 1rem; }");
+            sb.AppendLine("    footer { text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 13px; color: #A8978A; margin-top: 3rem; border-top: 1px solid #FED7AA; padding-top: 1rem; }");
             sb.AppendLine("  </style>");
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("  <header>");
+            sb.AppendLine($"    {FlameSvg}");
             var logoDataUri = LeesLogoAlsDataUri();
             if (!string.IsNullOrEmpty(logoDataUri))
             {

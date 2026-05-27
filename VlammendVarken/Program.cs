@@ -240,6 +240,47 @@ namespace VlammendVarken
                 vegetarisch: true
             );
 
+            // --- Aanpassingen ---
+            Aanpassing gaarheid = new Aanpassing(
+                "Gaarheid",
+                new List<AanpassingOptie>
+                {
+                    new AanpassingOptie("rare"),
+                    new AanpassingOptie("medium"),
+                    new AanpassingOptie("well-done")
+                });
+
+            Aanpassing saus = new Aanpassing(
+                "Saus",
+                new List<AanpassingOptie>
+                {
+                    new AanpassingOptie("jus"),
+                    new AanpassingOptie("peperroomsaus", 1.50m),
+                    new AanpassingOptie("champignonsaus", 1.25m)
+                });
+
+            Aanpassing bijgerecht = new Aanpassing(
+                "Bijgerecht",
+                new List<AanpassingOptie>
+                {
+                    new AanpassingOptie("frieten"),
+                    new AanpassingOptie("aardappelpuree"),
+                    new AanpassingOptie("seizoensgroente"),
+                    new AanpassingOptie("salade")
+                },
+                minKeuzes: 1,
+                maxKeuzes: 2);
+
+            varkenshaas.VoegAanpassingToe(gaarheid);
+            varkenshaas.VoegAanpassingToe(saus);
+            varkenshaas.VoegAanpassingToe(bijgerecht);
+
+            spareribs.VoegAanpassingToe(saus);
+            spareribs.VoegAanpassingToe(bijgerecht);
+
+            buikspek.VoegAanpassingToe(saus);
+            buikspek.VoegAanpassingToe(bijgerecht);
+
             // Menukaart vullen
             menukaart.VoegToe(pate);
             menukaart.VoegToe(bouillon);
@@ -295,6 +336,26 @@ namespace VlammendVarken
             // Gast bestelt iets
             Console.WriteLine("\n=== Bestelling ===");
             buikspek.Bestel();
+
+            // Gast bestelt met aanpassingen
+            Console.WriteLine("\n=== Bestelling met aanpassingen ===");
+            BestelRegel varkenshaasRegel = new BestelRegel(varkenshaas, new[]
+            {
+                new GekozenAanpassing(gaarheid, gaarheid.Opties[1]),
+                new GekozenAanpassing(saus, saus.Opties[1]),
+                new GekozenAanpassing(bijgerecht, bijgerecht.Opties[0]),
+                new GekozenAanpassing(bijgerecht, bijgerecht.Opties[2])
+            });
+
+            BestelRegel spareribsRegel = new BestelRegel(spareribs, new[]
+            {
+                new GekozenAanpassing(saus, saus.Opties[2]),
+                new GekozenAanpassing(bijgerecht, bijgerecht.Opties[0])
+            });
+
+            Console.WriteLine(varkenshaasRegel);
+            Console.WriteLine(spareribsRegel);
+            Console.WriteLine($"Totaal: {varkenshaasRegel.Totaalprijs + spareribsRegel.Totaalprijs:C}");
 
             // HTML-menukaart genereren
             string htmlPad = "menukaart.html";

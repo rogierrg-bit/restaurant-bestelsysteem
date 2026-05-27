@@ -11,21 +11,21 @@ namespace VlammendVarken
     public class Aanpassing
     {
         /// <summary>Weergavenaam van de keuze, bijvoorbeeld "Gaarheid".</summary>
-        public string Naam { get; set; }
+        public string Naam { get; init; }
 
         /// <summary>
         /// Minimaal aantal opties dat de gast moet kiezen. 0 betekent optioneel.
         /// Standaard 1.
         /// </summary>
-        public int MinKeuzes { get; set; }
+        public int MinKeuzes { get; init; }
 
         /// <summary>
         /// Maximaal aantal opties dat de gast mag kiezen. Standaard 1.
         /// </summary>
-        public int MaxKeuzes { get; set; }
+        public int MaxKeuzes { get; init; }
 
         /// <summary>De beschikbare opties waaruit gekozen kan worden.</summary>
-        public List<AanpassingOptie> Opties { get; set; }
+        public List<AanpassingOptie> Opties { get; init; }
 
         /// <summary>Geeft aan of de gast minstens één optie moet kiezen.</summary>
         public bool IsVerplicht => MinKeuzes >= 1;

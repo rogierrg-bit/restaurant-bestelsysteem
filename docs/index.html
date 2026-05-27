@@ -152,6 +152,43 @@
     .modal-btn-cancel{flex:1;background:var(--border);border:none;color:var(--text);font-size:0.9rem;font-weight:600;padding:13px;border-radius:var(--radius-sm);cursor:pointer;}
     .modal-btn-confirm{flex:2;background:var(--accent);border:none;color:#fff;font-size:0.9rem;font-weight:700;padding:13px;border-radius:var(--radius-sm);cursor:pointer;}
 
+    /* AANPASSINGEN MODAL */
+    #aanp-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:550;display:none;align-items:flex-end;justify-content:center;}
+    #aanp-overlay.open{display:flex;}
+    #aanp-panel{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-width:480px;max-height:90vh;display:flex;flex-direction:column;border:1px solid var(--border);border-bottom:none;animation:slideUp 0.3s cubic-bezier(0.32,0.72,0,1);}
+    @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+    .aanp-header{padding:16px 18px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+    .aanp-titel{font-size:1.05rem;font-weight:800;line-height:1.3;}
+    .aanp-basisprijs{font-size:0.78rem;color:var(--text-muted);margin-top:2px;}
+    .aanp-body{flex:1;overflow-y:auto;padding:4px 18px 12px;}
+    .aanp-groep{padding:14px 0;border-bottom:1px solid var(--border);}
+    .aanp-groep:last-child{border-bottom:none;}
+    .aanp-groep-label{font-size:0.88rem;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+    .aanp-groep-hint{font-size:0.68rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+    .aanp-groep-hint.verplicht{color:var(--accent);}
+    .aanp-optie{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;cursor:pointer;transition:background 0.15s,border-color 0.15s;background:var(--card);}
+    .aanp-optie:hover{border-color:var(--accent);}
+    .aanp-optie.gekozen{border-color:var(--accent);background:var(--accent-glow);}
+    .aanp-optie-radio{display:flex;align-items:center;gap:10px;flex:1;}
+    .aanp-optie-radio input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;cursor:pointer;}
+    .aanp-optie-label{font-size:0.85rem;color:var(--text);}
+    .aanp-meerprijs{font-size:0.78rem;font-weight:700;color:var(--gold);white-space:nowrap;}
+    .aanp-tekst{width:100%;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:0.85rem;padding:10px 12px;resize:vertical;min-height:64px;}
+    .aanp-tekst:focus{outline:none;border-color:var(--accent);}
+    .aanp-footer{padding:14px 18px;border-top:1px solid var(--border);background:var(--surface);}
+    .aanp-prijs-live{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .aanp-prijs-live-label{font-size:0.9rem;color:var(--text-muted);}
+    .aanp-prijs-live-amount{font-size:1.3rem;font-weight:800;color:var(--accent);}
+    .aanp-btns{display:flex;gap:10px;}
+    .aanp-btn-cancel{flex:1;background:var(--border);border:none;color:var(--text);font-size:0.9rem;font-weight:600;padding:13px;border-radius:var(--radius-sm);cursor:pointer;}
+    .aanp-btn-confirm{flex:2;background:var(--accent);border:none;color:#fff;font-size:0.9rem;font-weight:700;padding:13px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.2s;}
+    .aanp-btn-confirm:active{background:var(--accent-dark);}
+    .aanp-btn-confirm:disabled{background:var(--text-dim);cursor:not-allowed;}
+
+    /* CART ITEM AANPASSINGEN */
+    .cart-item-aanp{font-size:0.72rem;color:var(--text-muted);margin-top:4px;line-height:1.45;}
+    .cart-item-opmerking{font-size:0.72rem;color:var(--text-muted);margin-top:3px;font-style:italic;}
+
     /* SUCCES */
     #succes-modal{position:fixed;inset:0;background:var(--bg);z-index:600;display:none;align-items:center;justify-content:center;padding:24px;}
     #succes-modal.open{display:flex;}
@@ -276,6 +313,30 @@
     </div>
   </div>
 
+  <!-- AANPASSINGEN MODAL -->
+  <div id="aanp-overlay" onclick="handleAanpOverlayClick(event)">
+    <div id="aanp-panel">
+      <div class="aanp-header">
+        <div>
+          <div class="aanp-titel" id="aanp-titel"></div>
+          <div class="aanp-basisprijs" id="aanp-basisprijs"></div>
+        </div>
+        <button class="cart-close-btn" onclick="closeAanpModal()">✕</button>
+      </div>
+      <div class="aanp-body" id="aanp-body"></div>
+      <div class="aanp-footer">
+        <div class="aanp-prijs-live">
+          <span class="aanp-prijs-live-label">Totaal</span>
+          <span class="aanp-prijs-live-amount" id="aanp-prijs-live">€ 0,00</span>
+        </div>
+        <div class="aanp-btns">
+          <button class="aanp-btn-cancel" onclick="closeAanpModal()">Annuleer</button>
+          <button class="aanp-btn-confirm" id="aanp-confirm" onclick="bevestigAanpassingen()" disabled>Toevoegen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SUCCES SCREEN -->
   <div id="succes-modal">
     <div class="succes-box">
@@ -292,7 +353,8 @@
 
   <script>
     // ── STATE ──────────────────────────────────────────────────────
-    let cart = {}, tafelNummer = '?', currentLang = 'nl';
+    let cart = [], _lineCounter = 0, tafelNummer = '?', currentLang = 'nl';
+    let huidigeAanpassingen = null;
 
     // ── LANGUAGE FLAGS & LABELS ────────────────────────────────────
     const langMeta = {
@@ -428,6 +490,250 @@
       ],
     };
 
+    // ── AANPASSINGEN PER GERECHT (NL-only, frontend-data) ──────────
+    // OPM = universeel opmerking-veld, op elk gerecht. Vrij tekst, optioneel.
+    const OPM = { id:'opmerking', label:'Bijzonderheden of allergieën?', type:'tekst', verplicht:false,
+      placeholder:'Bijv. allergie, voorkeur of opmerking voor de keuken...' };
+
+    const aanpassingenData = {
+      // ── VOORGERECHTEN ──
+      v1: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'boer',label:'Boerenbrood (huis)',meerprijs:0},
+            {id:'gv',label:'Glutenvrij toast',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v2: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'geen',label:'Geen brood',meerprijs:0},
+            {id:'boer',label:'Boerenbrood',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v3: { groepen: [
+        { id:'dress', label:'Dressing', type:'radio', verplicht:true,
+          opties:[
+            {id:'balsa',label:'Balsamico (huis)',meerprijs:0},
+            {id:'walnoot',label:'Walnootolie & honing',meerprijs:0},
+            {id:'yog',label:'Yoghurt-munt',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'geit',label:'Extra geitenkaas',meerprijs:1.50},
+            {id:'noot',label:'Extra walnoot',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v4: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'boer',label:'Boerenbrood',meerprijs:0},
+            {id:'toast',label:'Geroosterd toast',meerprijs:0},
+            {id:'gv',label:'Glutenvrij toast',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'mier',label:'Extra mierikswortelroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+
+      // ── HOOFDGERECHTEN ──
+      h1: { groepen: [
+        { id:'gaarheid', label:'Gaarheid', type:'radio', verplicht:true,
+          opties:[
+            {id:'rare',label:'Rare',meerprijs:0},
+            {id:'medium',label:'Medium',meerprijs:0},
+            {id:'welldone',label:'Well-done',meerprijs:0},
+          ]},
+        { id:'saus', label:'Saus', type:'radio', verplicht:true,
+          opties:[
+            {id:'tijm',label:'Tijmsaus (huis)',meerprijs:0},
+            {id:'peper',label:'Peperroomsaus',meerprijs:1.50},
+            {id:'champ',label:'Champignonroomsaus',meerprijs:1.50},
+          ]},
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'friet',label:'Friet',meerprijs:0},
+            {id:'pure',label:'Aardappelpuree',meerprijs:0},
+            {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
+            {id:'groente',label:'Seizoensgroenten',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      h2: { groepen: [
+        { id:'saus', label:'Saus', type:'radio', verplicht:true,
+          opties:[
+            {id:'bbq',label:'BBQ (huis)',meerprijs:0},
+            {id:'honey',label:'Honey-mustard',meerprijs:0},
+            {id:'chipotle',label:'Spicy chipotle',meerprijs:1.00},
+          ]},
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'friet',label:'Friet (huis)',meerprijs:0},
+            {id:'slaw',label:'Coleslaw (huis)',meerprijs:0},
+            {id:'pure',label:'Aardappelpuree',meerprijs:0},
+            {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      h3: { groepen: [
+        { id:'saus', label:'Saus', type:'radio', verplicht:true,
+          opties:[
+            {id:'jus',label:'Huisjus met appel (huis)',meerprijs:0},
+            {id:'mosterd',label:'Mosterddressing',meerprijs:0},
+            {id:'peper',label:'Peperroomsaus',meerprijs:1.50},
+          ]},
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'gratin',label:'Aardappelgratin (huis)',meerprijs:0},
+            {id:'friet',label:'Friet',meerprijs:0},
+            {id:'pure',label:'Aardappelpuree',meerprijs:0},
+            {id:'groente',label:'Seizoensgroenten',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      h4: { groepen: [
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'pure',label:'Aardappelpuree (huis)',meerprijs:0},
+            {id:'friet',label:'Friet',meerprijs:0},
+            {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
+            {id:'groente',label:'Seizoensgroenten',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'jus',label:'Extra jus',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      h5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'truffel',label:'Extra truffelolie',meerprijs:2.50},
+            {id:'parm',label:'Extra Parmezaan',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+
+      // ── NAGERECHTEN ──
+      n1: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+            {id:'ijs',label:'Extra bol vanille-ijs',meerprijs:1.50},
+          ]},
+        OPM,
+      ]},
+      n2: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'aard',label:'Extra aardbeiencompote',meerprijs:0.75},
+          ]},
+        OPM,
+      ]},
+      n3: { groepen: [
+        { id:'ijs', label:'IJs-smaak', type:'radio', verplicht:true,
+          opties:[
+            {id:'vanille',label:'Vanille',meerprijs:0},
+            {id:'karamel',label:'Karamel',meerprijs:0},
+            {id:'kaneel',label:'Kaneel',meerprijs:0},
+            {id:'geen',label:'Zonder ijs',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      n4: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'koek',label:'Extra amandelkoekje',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      n5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+
+      // ── DRANKEN ──
+      d1: { groepen: [OPM] },
+      d2: { groepen: [OPM] },
+      d3: { groepen: [OPM] },
+      d4: { groepen: [OPM] },
+      d5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontje',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d6: { groepen: [OPM] },
+      d7: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontjes',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d8: { groepen: [
+        { id:'smaak', label:'Smaak', type:'radio', verplicht:true,
+          opties:[
+            {id:'cola',label:'Cola',meerprijs:0},
+            {id:'colaz',label:'Cola Zero',meerprijs:0},
+            {id:'fanta',label:'Fanta',meerprijs:0},
+            {id:'sprite',label:'Sprite',meerprijs:0},
+            {id:'icetea',label:'Ice tea',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontjes',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d9: { groepen: [
+        { id:'type', label:'Type', type:'radio', verplicht:true,
+          opties:[
+            {id:'rood',label:'Spa Rood (bruisend)',meerprijs:0},
+            {id:'blauw',label:'Spa Blauw (stil)',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d10: { groepen: [
+        { id:'variant', label:'Wat wilt u?', type:'radio', verplicht:true,
+          opties:[
+            {id:'espresso',label:'Espresso',meerprijs:0},
+            {id:'cap',label:'Cappuccino',meerprijs:0.50},
+            {id:'latte',label:'Latte macchiato',meerprijs:0.80},
+            {id:'thee',label:'Thee (kies aan tafel)',meerprijs:0},
+          ]},
+        { id:'suiker', label:'Suiker', type:'radio', verplicht:true,
+          opties:[
+            {id:'geen',label:'Zonder suiker',meerprijs:0},
+            {id:'1',label:'1 klontje',meerprijs:0},
+            {id:'2',label:'2 klontjes',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'melk',label:'Met extra melk',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+    };
+
+    function heeftAanpassingen(id){ return !!aanpassingenData[id]; }
+
     // ── SECTION KEY MAP ────────────────────────────────────────────
     const sectionKeys = ['voorgerechten','hoofdgerechten','nagerechten','dranken'];
     const sectionIcons = {voorgerechten:'🥗',hoofdgerechten:'🍖',nagerechten:'🍮',dranken:'🥂'};
@@ -536,26 +842,65 @@
     }
 
     // ── CART ───────────────────────────────────────────────────────
-    function findItem(id){for(const k of sectionKeys)for(const it of menuData[k])if(it.id===id)return it;}
-    function addToCart(id){cart[id]=(cart[id]||0)+1;updateCartBadge();showToast();}
-    function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCartBadge();renderCartItems();}
-    function updateCartBadge(){const n=Object.values(cart).reduce((a,b)=>a+b,0);const b=document.getElementById('cart-badge');b.textContent=n;b.style.display=n>0?'flex':'none';}
-    function cartTotal(){return Object.entries(cart).reduce((s,[id,q])=>{const it=findItem(id);return s+(it?it.prijs*q:0);},0);}
+    function findItemById(id){for(const k of sectionKeys)for(const it of menuData[k])if(it.id===id)return it;}
+
+    function pushCartLine(id, keuzes, opmerking, extraPrijs){
+      cart.push({lineId: ++_lineCounter, id, qty:1, keuzes, opmerking, extraPrijs});
+      updateCartBadge();
+    }
+
+    function addToCart(id){
+      if(heeftAanpassingen(id)){ openAanpModal(id); return; }
+      pushCartLine(id, [], '', 0);
+      showToast();
+    }
+
+    function changeQty(lineId, d){
+      const idx = cart.findIndex(l=>l.lineId===lineId);
+      if(idx<0) return;
+      cart[idx].qty += d;
+      if(cart[idx].qty<=0) cart.splice(idx,1);
+      updateCartBadge();
+      renderCartItems();
+    }
+
+    function updateCartBadge(){
+      const n = cart.reduce((a,l)=>a+l.qty,0);
+      const b = document.getElementById('cart-badge');
+      b.textContent = n;
+      b.style.display = n>0?'flex':'none';
+    }
+
+    function cartTotal(){
+      return cart.reduce((s,l)=>{
+        const it = findItemById(l.id);
+        return s + (it ? (it.prijs + l.extraPrijs) * l.qty : 0);
+      },0);
+    }
 
     function renderCartItems(){
       const list=document.getElementById('cart-items-list');
       const tr=ui[currentLang]; const l=currentLang;
-      const keys=Object.keys(cart);
-      if(keys.length===0){
+      if(cart.length===0){
         list.innerHTML=`<div class="cart-empty"><div class="cart-empty-icon">🍽️</div>${tr.cartEmpty}</div>`;
         document.getElementById('bestel-btn').disabled=true;
         document.getElementById('cart-total').textContent='€ 0,00';
         return;
       }
       document.getElementById('bestel-btn').disabled=false;
-      list.innerHTML=keys.map(id=>{
-        const it=findItem(id);const q=cart[id];
-        return `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${it.naam[l]}</div><div class="cart-item-price">€ ${(it.prijs*q).toFixed(2).replace('.',',')} <span style="color:var(--text-muted);font-size:0.72rem;">(${q} × € ${it.prijs.toFixed(2).replace('.',',')})</span></div></div><div class="qty-controls"><button class="qty-btn minus" onclick="changeQty('${id}',-1)">−</button><span class="qty-num">${q}</span><button class="qty-btn" onclick="changeQty('${id}',1)">+</button></div></div>`;
+      list.innerHTML=cart.map(line=>{
+        const it=findItemById(line.id);
+        const regelPrijs = it.prijs + line.extraPrijs;
+        const aanpHtml = line.keuzes.length ? `<div class="cart-item-aanp">${
+          line.keuzes.map(g=>{
+            const opts = g.opties.map(o=> o.meerprijs>0
+              ? `${o.label} (+€ ${o.meerprijs.toFixed(2).replace('.',',')})`
+              : o.label).join(', ');
+            return `<strong style="color:var(--text);font-weight:600;">${g.groepLabel}:</strong> ${opts}`;
+          }).join(' &nbsp;·&nbsp; ')
+        }</div>` : '';
+        const opmHtml = line.opmerking ? `<div class="cart-item-opmerking">"${line.opmerking}"</div>` : '';
+        return `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${it.naam[l]}</div>${aanpHtml}${opmHtml}<div class="cart-item-price">€ ${(regelPrijs*line.qty).toFixed(2).replace('.',',')} <span style="color:var(--text-muted);font-size:0.72rem;">(${line.qty} × € ${regelPrijs.toFixed(2).replace('.',',')})</span></div></div><div class="qty-controls"><button class="qty-btn minus" onclick="changeQty(${line.lineId},-1)">−</button><span class="qty-num">${line.qty}</span><button class="qty-btn" onclick="changeQty(${line.lineId},1)">+</button></div></div>`;
       }).join('');
       document.getElementById('cart-total').textContent=`€ ${cartTotal().toFixed(2).replace('.',',')}`;
     }
@@ -565,8 +910,168 @@
     function handleOverlayClick(e){if(e.target===document.getElementById('cart-overlay'))closeCart();}
     function openConfirm(){closeCart();document.getElementById('confirm-modal').classList.add('open');}
     function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');}
-    function plaatsOrder(){closeConfirm();cart={};updateCartBadge();document.getElementById('succes-modal').classList.add('open');}
+    function plaatsOrder(){closeConfirm();cart=[];updateCartBadge();document.getElementById('succes-modal').classList.add('open');}
     function nieuweBestelling(){document.getElementById('succes-modal').classList.remove('open');}
+
+    // ── AANPASSINGEN MODAL ─────────────────────────────────────────
+    function openAanpModal(id){
+      const def = aanpassingenData[id]; if(!def) return;
+      const item = findItemById(id);
+      huidigeAanpassingen = { id, selecties:{} };
+      def.groepen.forEach(g=>{
+        if(g.type==='checkbox') huidigeAanpassingen.selecties[g.id] = new Set();
+        else if(g.type==='radio') huidigeAanpassingen.selecties[g.id] = null;
+        else huidigeAanpassingen.selecties[g.id] = '';
+      });
+      document.getElementById('aanp-titel').textContent = item.naam[currentLang];
+      document.getElementById('aanp-basisprijs').textContent = `Basisprijs € ${item.prijs.toFixed(2).replace('.',',')}`;
+      renderAanpBody();
+      updateAanpPrijs();
+      toggleAanpConfirmBtn();
+      document.getElementById('aanp-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAanpModal(){
+      document.getElementById('aanp-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      huidigeAanpassingen = null;
+    }
+
+    function handleAanpOverlayClick(e){
+      if(e.target===document.getElementById('aanp-overlay')) closeAanpModal();
+    }
+
+    function renderAanpBody(){
+      const def = aanpassingenData[huidigeAanpassingen.id];
+      const body = document.getElementById('aanp-body');
+      body.innerHTML = def.groepen.map(g=>{
+        let hint, hintCls='';
+        if(g.type==='checkbox'){
+          if(g.min===0){
+            hint = g.max===1 ? 'optioneel' : `optioneel · max ${g.max}`;
+            hintCls = '';
+          } else {
+            hint = g.min===g.max ? `kies ${g.min}` : `kies ${g.min}–${g.max}`;
+            hintCls = 'verplicht';
+          }
+        } else if(g.type==='radio'){
+          hint = g.verplicht?'verplicht':'optioneel';
+          if(g.verplicht) hintCls = 'verplicht';
+        } else {
+          hint = 'optioneel';
+        }
+        let inner = '';
+        if(g.type==='tekst'){
+          inner = `<textarea class="aanp-tekst" placeholder="${g.placeholder||''}" oninput="onTekstChange('${g.id}',this.value)"></textarea>`;
+        } else {
+          const inputType = g.type==='radio' ? 'radio' : 'checkbox';
+          inner = g.opties.map(o=>{
+            const meer = o.meerprijs>0 ? `<span class="aanp-meerprijs">+€ ${o.meerprijs.toFixed(2).replace('.',',')}</span>` : '';
+            return `<label class="aanp-optie" data-groep="${g.id}" data-optie="${o.id}">
+              <span class="aanp-optie-radio"><input type="${inputType}" name="g-${g.id}" value="${o.id}" onchange="onKeuzeChange('${g.id}','${o.id}',${g.type==='radio'})"/><span class="aanp-optie-label">${o.label}</span></span>
+              ${meer}
+            </label>`;
+          }).join('');
+        }
+        return `<div class="aanp-groep"><div class="aanp-groep-label"><span>${g.label}</span><span class="aanp-groep-hint ${hintCls}">${hint}</span></div>${inner}</div>`;
+      }).join('');
+    }
+
+    function onKeuzeChange(groepId, optieId, isRadio){
+      const sel = huidigeAanpassingen.selecties[groepId];
+      if(isRadio){
+        huidigeAanpassingen.selecties[groepId] = optieId;
+      } else {
+        if(sel.has(optieId)) sel.delete(optieId); else sel.add(optieId);
+        const def = aanpassingenData[huidigeAanpassingen.id].groepen.find(x=>x.id===groepId);
+        if(def.max && sel.size > def.max){
+          sel.delete(optieId);
+          const cb = document.querySelector(`input[name="g-${groepId}"][value="${optieId}"]`);
+          if(cb) cb.checked = false;
+        }
+      }
+      refreshOptieStyling();
+      updateAanpPrijs();
+      toggleAanpConfirmBtn();
+    }
+
+    function onTekstChange(groepId, value){
+      huidigeAanpassingen.selecties[groepId] = value;
+      toggleAanpConfirmBtn();
+    }
+
+    function refreshOptieStyling(){
+      document.querySelectorAll('#aanp-body .aanp-optie').forEach(lbl=>{
+        const sel = huidigeAanpassingen.selecties[lbl.dataset.groep];
+        const actief = (sel instanceof Set) ? sel.has(lbl.dataset.optie) : sel===lbl.dataset.optie;
+        lbl.classList.toggle('gekozen', actief);
+      });
+    }
+
+    function berekenExtraPrijs(){
+      const def = aanpassingenData[huidigeAanpassingen.id];
+      let extra = 0;
+      def.groepen.forEach(g=>{
+        if(g.type==='tekst') return;
+        const sel = huidigeAanpassingen.selecties[g.id];
+        if(g.type==='radio'){
+          if(sel){ const o = g.opties.find(x=>x.id===sel); if(o) extra += o.meerprijs; }
+        } else {
+          sel.forEach(oid=>{ const o = g.opties.find(x=>x.id===oid); if(o) extra += o.meerprijs; });
+        }
+      });
+      return extra;
+    }
+
+    function updateAanpPrijs(){
+      const it = findItemById(huidigeAanpassingen.id);
+      const total = it.prijs + berekenExtraPrijs();
+      document.getElementById('aanp-prijs-live').textContent = `€ ${total.toFixed(2).replace('.',',')}`;
+    }
+
+    function valideerAanpassingen(){
+      const def = aanpassingenData[huidigeAanpassingen.id];
+      for(const g of def.groepen){
+        const sel = huidigeAanpassingen.selecties[g.id];
+        if(g.type==='radio' && g.verplicht && !sel) return false;
+        if(g.type==='checkbox'){
+          const cnt = sel.size;
+          if(g.min!=null && cnt<g.min) return false;
+          if(g.max!=null && cnt>g.max) return false;
+        }
+      }
+      return true;
+    }
+
+    function toggleAanpConfirmBtn(){
+      document.getElementById('aanp-confirm').disabled = !valideerAanpassingen();
+    }
+
+    function bevestigAanpassingen(){
+      if(!valideerAanpassingen()) return;
+      const def = aanpassingenData[huidigeAanpassingen.id];
+      const keuzes = [];
+      let opmerking = '';
+      def.groepen.forEach(g=>{
+        const sel = huidigeAanpassingen.selecties[g.id];
+        if(g.type==='tekst'){
+          if(sel && sel.trim()) opmerking = sel.trim();
+          return;
+        }
+        const labels = [];
+        if(g.type==='radio'){
+          if(sel){ const o = g.opties.find(x=>x.id===sel); if(o) labels.push({label:o.label, meerprijs:o.meerprijs}); }
+        } else {
+          sel.forEach(oid=>{ const o = g.opties.find(x=>x.id===oid); if(o) labels.push({label:o.label, meerprijs:o.meerprijs}); });
+        }
+        if(labels.length) keuzes.push({groepLabel:g.label, opties:labels});
+      });
+      const extraPrijs = berekenExtraPrijs();
+      pushCartLine(huidigeAanpassingen.id, keuzes, opmerking, extraPrijs);
+      closeAanpModal();
+      showToast();
+    }
 
     let toastTimer;
     function showToast(){const t=document.getElementById('toast');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}

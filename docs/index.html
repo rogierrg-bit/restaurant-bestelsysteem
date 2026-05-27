@@ -491,7 +491,60 @@
     };
 
     // ── AANPASSINGEN PER GERECHT (NL-only, frontend-data) ──────────
+    // OPM = universeel opmerking-veld, op elk gerecht. Vrij tekst, optioneel.
+    const OPM = { id:'opmerking', label:'Bijzonderheden of allergieën?', type:'tekst', verplicht:false,
+      placeholder:'Bijv. allergie, voorkeur of opmerking voor de keuken...' };
+
     const aanpassingenData = {
+      // ── VOORGERECHTEN ──
+      v1: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'boer',label:'Boerenbrood (huis)',meerprijs:0},
+            {id:'gv',label:'Glutenvrij toast',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v2: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'geen',label:'Geen brood',meerprijs:0},
+            {id:'boer',label:'Boerenbrood',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v3: { groepen: [
+        { id:'dress', label:'Dressing', type:'radio', verplicht:true,
+          opties:[
+            {id:'balsa',label:'Balsamico (huis)',meerprijs:0},
+            {id:'walnoot',label:'Walnootolie & honing',meerprijs:0},
+            {id:'yog',label:'Yoghurt-munt',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'geit',label:'Extra geitenkaas',meerprijs:1.50},
+            {id:'noot',label:'Extra walnoot',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v4: { groepen: [
+        { id:'brood', label:'Brood erbij', type:'radio', verplicht:true,
+          opties:[
+            {id:'boer',label:'Boerenbrood',meerprijs:0},
+            {id:'toast',label:'Geroosterd toast',meerprijs:0},
+            {id:'gv',label:'Glutenvrij toast',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      v5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'mier',label:'Extra mierikswortelroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+
+      // ── HOOFDGERECHTEN ──
       h1: { groepen: [
         { id:'gaarheid', label:'Gaarheid', type:'radio', verplicht:true,
           opties:[
@@ -512,8 +565,7 @@
             {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
             {id:'groente',label:'Seizoensgroenten',meerprijs:0},
           ]},
-        { id:'opmerking', label:'Opmerking voor de keuken', type:'tekst', verplicht:false,
-          placeholder:'Bijv. allergie, extra wens...' },
+        OPM,
       ]},
       h2: { groepen: [
         { id:'saus', label:'Saus', type:'radio', verplicht:true,
@@ -522,17 +574,141 @@
             {id:'honey',label:'Honey-mustard',meerprijs:0},
             {id:'chipotle',label:'Spicy chipotle',meerprijs:1.00},
           ]},
-      ]},
-      h3: { groepen: [
         { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
           opties:[
+            {id:'friet',label:'Friet (huis)',meerprijs:0},
+            {id:'slaw',label:'Coleslaw (huis)',meerprijs:0},
+            {id:'pure',label:'Aardappelpuree',meerprijs:0},
+            {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+      h3: { groepen: [
+        { id:'saus', label:'Saus', type:'radio', verplicht:true,
+          opties:[
+            {id:'jus',label:'Huisjus met appel (huis)',meerprijs:0},
+            {id:'mosterd',label:'Mosterddressing',meerprijs:0},
+            {id:'peper',label:'Peperroomsaus',meerprijs:1.50},
+          ]},
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'gratin',label:'Aardappelgratin (huis)',meerprijs:0},
             {id:'friet',label:'Friet',meerprijs:0},
             {id:'pure',label:'Aardappelpuree',meerprijs:0},
-            {id:'gratin',label:'Extra aardappelgratin',meerprijs:1.50},
             {id:'groente',label:'Seizoensgroenten',meerprijs:0},
           ]},
-        { id:'opmerking', label:'Opmerking', type:'tekst', verplicht:false,
-          placeholder:'Bijv. zonder appelcompote...' },
+        OPM,
+      ]},
+      h4: { groepen: [
+        { id:'bij', label:'Bijgerechten', type:'checkbox', verplicht:true, min:1, max:2,
+          opties:[
+            {id:'pure',label:'Aardappelpuree (huis)',meerprijs:0},
+            {id:'friet',label:'Friet',meerprijs:0},
+            {id:'gratin',label:'Aardappelgratin',meerprijs:1.00},
+            {id:'groente',label:'Seizoensgroenten',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'jus',label:'Extra jus',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      h5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'truffel',label:'Extra truffelolie',meerprijs:2.50},
+            {id:'parm',label:'Extra Parmezaan',meerprijs:1.00},
+          ]},
+        OPM,
+      ]},
+
+      // ── NAGERECHTEN ──
+      n1: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:2,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+            {id:'ijs',label:'Extra bol vanille-ijs',meerprijs:1.50},
+          ]},
+        OPM,
+      ]},
+      n2: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'aard',label:'Extra aardbeiencompote',meerprijs:0.75},
+          ]},
+        OPM,
+      ]},
+      n3: { groepen: [
+        { id:'ijs', label:'IJs-smaak', type:'radio', verplicht:true,
+          opties:[
+            {id:'vanille',label:'Vanille',meerprijs:0},
+            {id:'karamel',label:'Karamel',meerprijs:0},
+            {id:'kaneel',label:'Kaneel',meerprijs:0},
+            {id:'geen',label:'Zonder ijs',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      n4: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'koek',label:'Extra amandelkoekje',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+      n5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'slag',label:'Extra slagroom',meerprijs:0.50},
+          ]},
+        OPM,
+      ]},
+
+      // ── DRANKEN ──
+      d1: { groepen: [OPM] },
+      d2: { groepen: [OPM] },
+      d3: { groepen: [OPM] },
+      d4: { groepen: [OPM] },
+      d5: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontje',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d6: { groepen: [OPM] },
+      d7: { groepen: [
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontjes',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d8: { groepen: [
+        { id:'smaak', label:'Smaak', type:'radio', verplicht:true,
+          opties:[
+            {id:'cola',label:'Cola',meerprijs:0},
+            {id:'colaz',label:'Cola Zero',meerprijs:0},
+            {id:'fanta',label:'Fanta',meerprijs:0},
+            {id:'sprite',label:'Sprite',meerprijs:0},
+            {id:'icetea',label:'Ice tea',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'ijs',label:'Met ijsklontjes',meerprijs:0},
+          ]},
+        OPM,
+      ]},
+      d9: { groepen: [
+        { id:'type', label:'Type', type:'radio', verplicht:true,
+          opties:[
+            {id:'rood',label:'Spa Rood (bruisend)',meerprijs:0},
+            {id:'blauw',label:'Spa Blauw (stil)',meerprijs:0},
+          ]},
+        OPM,
       ]},
       d10: { groepen: [
         { id:'variant', label:'Wat wilt u?', type:'radio', verplicht:true,
@@ -542,10 +718,17 @@
             {id:'latte',label:'Latte macchiato',meerprijs:0.80},
             {id:'thee',label:'Thee (kies aan tafel)',meerprijs:0},
           ]},
-      ]},
-      v4: { groepen: [
-        { id:'opmerking', label:'Opmerking voor de keuken', type:'tekst', verplicht:false,
-          placeholder:'Bijv. extra mosterd, geen kappers...' },
+        { id:'suiker', label:'Suiker', type:'radio', verplicht:true,
+          opties:[
+            {id:'geen',label:'Zonder suiker',meerprijs:0},
+            {id:'1',label:'1 klontje',meerprijs:0},
+            {id:'2',label:'2 klontjes',meerprijs:0},
+          ]},
+        { id:'extra', label:'Extra (optioneel)', type:'checkbox', verplicht:false, min:0, max:1,
+          opties:[
+            {id:'melk',label:'Met extra melk',meerprijs:0},
+          ]},
+        OPM,
       ]},
     };
 
@@ -765,8 +948,13 @@
       body.innerHTML = def.groepen.map(g=>{
         let hint, hintCls='';
         if(g.type==='checkbox'){
-          hint = g.min===g.max ? `kies ${g.min}` : `kies ${g.min}–${g.max}`;
-          hintCls = 'verplicht';
+          if(g.min===0){
+            hint = g.max===1 ? 'optioneel' : `optioneel · max ${g.max}`;
+            hintCls = '';
+          } else {
+            hint = g.min===g.max ? `kies ${g.min}` : `kies ${g.min}–${g.max}`;
+            hintCls = 'verplicht';
+          }
         } else if(g.type==='radio'){
           hint = g.verplicht?'verplicht':'optioneel';
           if(g.verplicht) hintCls = 'verplicht';

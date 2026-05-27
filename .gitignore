@@ -365,3 +365,6 @@ FodyWeavers.xsd
 # .NET build output
 [Bb]in/
 [Oo]bj/
+
+# Gegenereerde demo-output
+menukaart.html
